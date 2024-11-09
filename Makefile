@@ -1,24 +1,14 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: abentaye <abentaye@student.s19.be>         +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/11/09 12:48:38 by abentaye          #+#    #+#              #
-#    Updated: 2024/11/09 15:31:09 by abentaye         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
-NAME := cub3D
 CC := cc
-CFLAGS := -Wall -Wextra -Werror
+CFLAGS := -Wall -Wextra -Werror -fsanitize=address -g3
 MLXPATH = ./minilibx
-MLXFLAGS := -L$(MLXPATH) -lmlx -framework OpenGL -framework AppKit
+LIBFT = ./libft
+LIBFTA = ./libft/libft.a
+MLXFLAGS := -L$(MLXPATH) -lmlx -framework OpenGL -framework AppKit 
 RM := @rm -f
-SRC :=	src/main.c \
-
-GNL := get_next_line.c get_next_line_utils.c
+SRC := src/main.c \
+		src/window.c \
+		src/map_reader.c \
+		src/error.c \
 
 Y = "\033[33m"
 R = "\033[31m"
@@ -28,29 +18,33 @@ X = "\033[0m"
 UP = "\033[A"
 CUT = "\033[K"
 
+NAME = cub3D
+
 all: $(NAME)
 
-$(NAME): $(SRC) $(MLXPATH)/libmlx.dylib
+$(LIBFTA):
+	@echo $(Y)"Compiling libft..."$(X)
+	@$(MAKE) -C $(LIBFT)
+	@echo $(G)"libft compiled successfully."$(X)
+
+$(NAME): $(SRC) $(LIBFTA) $(MLXPATH)/libmlx.a
 	@echo $(Y)"Compiling $(NAME)..."$(X)
-	@$(CC) $(CFLAGS) -o $(NAME) $(SRC) $(MLXFLAGS)
+	@$(CC) $(CFLAGS) -o $(NAME) $(SRC) $(LIBFTA) $(MLXFLAGS)
 	@echo $(G)"$(NAME) compiled successfully."$(X)
 
-$(MLXPATH)/libmlx.dylib:
-	@echo $(Y)"Cleaning MiniLibX..."$(X)
+$(MLXPATH)/libmlx.a:
 	@$(MAKE) -C $(MLXPATH) clean
 	@echo $(Y)"Compiling MiniLibX..."$(X)
 	@$(MAKE) -C $(MLXPATH)
 	@echo $(G)"MiniLibX compiled successfully."$(X)
 
 clean:
-	@echo $(Y)"Cleaning $(NAME)..."$(X)
 	@$(RM) $(NAME)
-	@echo $(G)"$(NAME) cleaned."$(X)
-
+	@echo $(R)"Cleaned $(NAME)"$(X)
 
 fclean: clean
-	@echo $(Y)"Cleaning all..."$(X)
-	@$(RM) $(MLXPATH)/libmlx.dylib
-	@echo $(G)"All cleaned."$(X)
+	@$(MAKE) -C $(LIBFT) fclean
+	@$(MAKE) -C $(MLXPATH) clean
+	@echo $(R)"Cleaned libft and MiniLibX"$(X)
 
-re : fclean all
+re: fclean all
