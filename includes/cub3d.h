@@ -6,7 +6,7 @@
 /*   By: abentaye <abentaye@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 22:03:33 by abentaye          #+#    #+#             */
-/*   Updated: 2024/11/09 19:40:42 by abentaye         ###   ########.fr       */
+/*   Updated: 2024/11/11 15:45:31 by abentaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <string.h>
 # include <fcntl.h>
 # include "../minilibx/mlx.h"
+# include "../src/get_next_line/get_next_line.h"
 
 //RESOLUTION 
 #define WIDTH 1920
@@ -44,22 +45,29 @@ typedef struct s_data
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
+	char	**map;
 }	t_data;
 
 typedef struct s_base
 {
-	t_mlx *mlx;
+	t_data	*data;
+	t_mlx	*mlx;
 }	t_base;
 
 //  ++++++++++++++++ window.c ++++++++++++++++
-t_base  *initialization(t_base *base);
+t_base	*initialization(t_base *base);
 
-// +++++++++++++++ map_reader.c ++++++++++++++
+// +++++++++++++++ file_reader.c ++++++++++++++
 
-int read_map_file(char *map);
+char	**read_map_file(char *map);
+void	ft_free_split(char **split);
 
-// ++++++++++++++++ error.c ++++++++++++++++
+// ++++++++++++++++ error.c +++++++++++++++++++
 
-void    error_handler(char *message);
+void	error_handler(char *message);
+
+// +++++++++++++++ map_reader.c +++++++++++++++
+
+char	**get_map(char *map_name);
 
 #endif

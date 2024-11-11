@@ -6,7 +6,7 @@
 /*   By: abentaye <abentaye@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 22:03:31 by abentaye          #+#    #+#             */
-/*   Updated: 2024/11/09 18:46:32 by abentaye         ###   ########.fr       */
+/*   Updated: 2024/11/11 16:51:15 by abentaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ int	main(int argc, char **argv)
 {
 	t_base *base;
 	
-	read_map_file(argv[1]);
 	args_suffix_checker(argc, argv);
+	read_map_file(argv[1]);
 	base = NULL;
 	base = initialization(base);
 	if (base == NULL)
