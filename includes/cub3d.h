@@ -6,7 +6,7 @@
 /*   By: abentaye <abentaye@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 22:03:33 by abentaye          #+#    #+#             */
-/*   Updated: 2024/11/11 15:45:31 by abentaye         ###   ########.fr       */
+/*   Updated: 2024/11/11 17:32:25 by abentaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ typedef struct s_base
 }	t_base;
 
 //  ++++++++++++++++ window.c ++++++++++++++++
-t_base	*initialization(t_base *base);
+void	initialization(t_base *base);
 
 // +++++++++++++++ file_reader.c ++++++++++++++
 

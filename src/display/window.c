@@ -1,49 +1,47 @@
 #include "../../includes/cub3d.h"
 
-static int setup(t_mlx *mlx)
+
+static int init_base_data(t_base *base)
 {
-    if (!mlx)
+    base->data = malloc(sizeof(t_data));
+    if (!base->data)
         return (1);
-    mlx->ptr = NULL;
-    mlx->win = NULL;
-    mlx->width = 0;
-    mlx->length = 0;
+    base->data->addr = NULL;
+    base->data->bits_per_pixel = 0;
+    base->data->endian = 0;
+    base->data->img = NULL;
+    base->data->line_length = 0;
+    base->data->map = NULL;
     return (0);
 }
 
-static int mlx_setup(t_mlx *mlx)
+static int mlx_setup(t_mlx **mlx)
 {
-    mlx = (t_mlx *)malloc(sizeof(t_mlx));
-    if (!mlx)
-        error_handler("Allocation error");
-    if (setup(mlx) == 0)
-    {
-        mlx->ptr = mlx_init();
-        mlx->win = mlx_new_window(mlx->ptr, WIDTH, HEIGHT, "cub3D");
-        mlx_loop(mlx);
-    }
-    else
+    *mlx = malloc(sizeof(t_mlx));
+    if (!*mlx)
+        return (1);
+    (*mlx)->ptr = mlx_init();
+    if (!(*mlx)->ptr)
+        return (1);
+    (*mlx)->win = mlx_new_window((*mlx)->ptr, WIDTH, HEIGHT, "cub3D");
+    if (!(*mlx)->win)
         return (1);
     return (0);
 }
 
-t_base  *initialization(t_base *base)
+void initialization(t_base *base)
 {
-    base = (t_base *)malloc(sizeof(t_base));
-    if (!base)
-        error_handler("Allocation error");
-    base->data = (t_data *)malloc(sizeof(t_data));
+    if (init_base_data(base) == 1)
+        error_handler("Allocation failed");
     if (!base->data)
     {
         free(base);
         error_handler("Allocation error");
     }
-    if (mlx_setup(base->mlx) == 1)
+    if (mlx_setup(&base->mlx) == 1)
     {
         free(base->data);
         free(base);
-        free(base->mlx);
-        return NULL;
+        error_handler("MLX setup failed");
     }
-    return (base);
 }

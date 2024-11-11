@@ -6,7 +6,7 @@
 /*   By: abentaye <abentaye@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 18:39:54 by abentaye          #+#    #+#             */
-/*   Updated: 2024/11/11 16:04:25 by abentaye         ###   ########.fr       */
+/*   Updated: 2024/11/11 18:24:02 by abentaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,11 +73,11 @@ static int	process_buffer(char *buffer, int *i)
 	return (0);
 }
 
-static int	read_valid(int fd)
+static int read_valid(int fd)
 {
-	char	*buffer;
-	int		b_read;
-	int		i;
+	char *buffer;
+	int b_read;
+	int i;
 
 	buffer = (char *)malloc(BUFFER_SIZE);
 	if (!buffer)
@@ -89,6 +89,8 @@ static int	read_valid(int fd)
 		buffer[b_read] = '\0';
 		if (process_buffer(buffer, &i) != 0)
 			return (handle_error(buffer, fd, "Settings scan failed"));
+		if (buffer[0] == '\0')
+			break;
 		b_read = read(fd, buffer, BUFFER_SIZE - 1);
 	}
 	if (b_read < 0)

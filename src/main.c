@@ -6,7 +6,7 @@
 /*   By: abentaye <abentaye@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 22:03:31 by abentaye          #+#    #+#             */
-/*   Updated: 2024/11/11 16:51:15 by abentaye         ###   ########.fr       */
+/*   Updated: 2024/11/11 18:50:26 by abentaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,25 @@ int	args_suffix_checker(int argc, char **argv)
 	return (0);
 }
 
-int	main(int argc, char **argv)
+int main(int argc, char **argv)
 {
-	t_base *base;
-	
-	args_suffix_checker(argc, argv);
-	read_map_file(argv[1]);
-	base = NULL;
-	base = initialization(base);
-	if (base == NULL)
-		return (1);
-	return (0);
+    t_base *base;
+
+    base = malloc(sizeof(t_base));
+    if (!base)
+        return (error_handler("Allocation failed"), 1);
+    initialization(base);
+    if (!base->data || !base->mlx)
+		return(error_handler("Error"), free(base), 1);
+    args_suffix_checker(argc, argv);
+    base->data->map = read_map_file(argv[1]);
+    if (!base->data->map)
+    {
+        free(base->data);
+        free(base->mlx);
+        free(base);
+        return (1);
+    }
+	mlx_loop(base->mlx->ptr);
+    return (0);
 }
