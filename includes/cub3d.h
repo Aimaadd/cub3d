@@ -6,7 +6,7 @@
 /*   By: abentaye <abentaye@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 22:03:33 by abentaye          #+#    #+#             */
-/*   Updated: 2024/11/11 17:32:25 by abentaye         ###   ########.fr       */
+/*   Updated: 2024/11/12 15:34:44 by abentaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,17 @@ typedef struct s_mlx
 	int		length;
 }	t_mlx;
 
+typedef struct s_textures
+{
+	char	*NO;
+	char	*SO;
+	char	*WE;
+	char	*EA;
+	char	*F;
+	char	*C;
+	int		set;
+}	t_textures;
+
 typedef struct s_data
 {
 	void	*img;
@@ -50,8 +61,9 @@ typedef struct s_data
 
 typedef struct s_base
 {
-	t_data	*data;
-	t_mlx	*mlx;
+	t_data		*data;
+	t_mlx		*mlx;
+	t_textures	*text;
 }	t_base;
 
 //  ++++++++++++++++ window.c ++++++++++++++++

@@ -6,26 +6,11 @@
 /*   By: abentaye <abentaye@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 10:28:18 by abentaye          #+#    #+#             */
-/*   Updated: 2024/11/11 16:34:58 by abentaye         ###   ########.fr       */
+/*   Updated: 2024/11/12 16:32:44 by abentaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-
-// static char *ft_strcpy(char *dest, const char *src)
-// {
-// 	char	*original_dest;
-
-// 	original_dest = dest;
-// 	while (*src != '\0')
-// 	{
-// 		*dest = *src;
-// 		src++;
-// 		dest++;
-// 	}
-// 	*dest = '\0';
-// 	return (original_dest);
-// }
 
 static char *skip_lines(char *line, int fd)
 {
@@ -65,7 +50,6 @@ char **get_map(char *map_name)
         if (!map[i])
             return (error_handler("Allocation failed"), close(fd), NULL);
         strcpy(map[i], line);
-        printf("%s", map[i]);
         free(line);
         i++;
         line = get_next_line(fd);

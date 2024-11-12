@@ -6,7 +6,7 @@
 /*   By: abentaye <abentaye@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 22:03:31 by abentaye          #+#    #+#             */
-/*   Updated: 2024/11/11 18:50:26 by abentaye         ###   ########.fr       */
+/*   Updated: 2024/11/12 15:48:30 by abentaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,9 @@ int main(int argc, char **argv)
     args_suffix_checker(argc, argv);
     base->data->map = read_map_file(argv[1]);
     if (!base->data->map)
-    {
-        free(base->data);
-        free(base->mlx);
         free(base);
-        return (1);
-    }
+    if (!base->data->map)
+        return (free(base->data), free(base->mlx), free(base), 1);
 	mlx_loop(base->mlx->ptr);
     return (0);
 }
