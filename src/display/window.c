@@ -6,7 +6,7 @@
 /*   By: abentaye <abentaye@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 15:35:18 by abentaye          #+#    #+#             */
-/*   Updated: 2024/11/15 16:15:18 by abentaye         ###   ########.fr       */
+/*   Updated: 2024/11/15 17:18:00 by abentaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,22 @@ static int	init_text(t_base *base)
 	return (0);
 }
 
+static int	init_player(t_player *player)
+{
+	if (!player)
+		return (1);
+	player->dir = 0;
+	player->pos_x = 0;
+	player->pos_y = 0;
+	return (0);
+}
+
 void	initialization(t_base *base, char **argv)
 {
 	base->map_name = argv[1];
+	base->player = malloc(sizeof(t_player));
+	if (init_player(base->player) == 1)
+		error_handler("Allocation failed");
 	if (init_base_data(base) == 1)
 		error_handler("Allocation failed");
 	if (!base->data)

@@ -6,7 +6,7 @@
 /*   By: abentaye <abentaye@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 22:03:33 by abentaye          #+#    #+#             */
-/*   Updated: 2024/11/15 14:14:01 by abentaye         ###   ########.fr       */
+/*   Updated: 2024/11/15 16:57:08 by abentaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@
 //BUFFER
 #define BUFFER_SIZE 1024
 
+
 typedef struct s_mlx 
 {
 	void	*win;
@@ -43,6 +44,13 @@ typedef struct s_mlx
 	int		width;
 	int		length;
 }	t_mlx;
+
+typedef struct s_player
+{
+	double	pos_x;
+	double	pos_y;
+	double	dir;
+}	t_player;
 
 typedef struct s_textures
 {
@@ -68,6 +76,7 @@ typedef struct s_data
 typedef struct s_base
 {
 	char		*map_name;
+	t_player	*player;
 	t_data		*data;
 	t_mlx		*mlx;
 	t_textures	*text;
