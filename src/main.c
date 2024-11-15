@@ -6,7 +6,7 @@
 /*   By: abentaye <abentaye@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 22:03:31 by abentaye          #+#    #+#             */
-/*   Updated: 2024/11/12 15:48:30 by abentaye         ###   ########.fr       */
+/*   Updated: 2024/11/15 13:39:49 by abentaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,19 @@ int	args_suffix_checker(int argc, char **argv)
 	return (0);
 }
 
+static void display_text(t_textures *text)
+{
+    printf("DISPLAY TEXTURES\n");
+    printf("NO : %s\n", text->NO);
+    printf("SO : %s\n", text->SO);
+    printf("WE :%s\n", text->WE);
+    printf("EA :%s\n", text->EA);
+    printf("F : %s\n", text->F);
+    printf("C : %s\n", text->C);
+    printf("set : %d\n", text->set);
+    printf("DONE PRINTING\n");
+}
+
 int main(int argc, char **argv)
 {
     t_base *base;
@@ -28,13 +41,13 @@ int main(int argc, char **argv)
     base = malloc(sizeof(t_base));
     if (!base)
         return (error_handler("Allocation failed"), 1);
-    initialization(base);
+    initialization(base, argv);
     if (!base->data || !base->mlx)
 		return(error_handler("Error"), free(base), 1);
     args_suffix_checker(argc, argv);
-    base->data->map = read_map_file(argv[1]);
-    if (!base->data->map)
-        free(base);
+    if (read_map_file(base) == NULL)
+        return (free(base), 1);
+    display_text(base->text);
     if (!base->data->map)
         return (free(base->data), free(base->mlx), free(base), 1);
 	mlx_loop(base->mlx->ptr);

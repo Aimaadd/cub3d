@@ -6,7 +6,7 @@
 /*   By: abentaye <abentaye@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 18:39:54 by abentaye          #+#    #+#             */
-/*   Updated: 2024/11/12 20:42:14 by abentaye         ###   ########.fr       */
+/*   Updated: 2024/11/15 16:11:45 by abentaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,12 @@
 
 static int	is_valid_param(char *param)
 {
-    printf("param : %s\n", param);
-    if (ft_strncmp(param, "NO ", 3) == 0 || ft_strncmp(param, "F ", 2) == 0
-        || ft_strncmp(param, "EA ", 3) == 0 || ft_strncmp(param, "C ", 2) == 0
-        || ft_strncmp(param, "SO ", 3) == 0 || ft_strncmp(param, "WE ", 3) == 0
-        || ft_strncmp(param, "\n", 1) == 0)
-        	return (0);
-	else
-	{
-		printf("problem\n");
-		return (1);
-	}
-    return (1);
+	if (ft_strncmp(param, "NO ", 3) == 0 || ft_strncmp(param, "F ", 2) == 0
+		|| ft_strncmp(param, "EA ", 3) == 0 || ft_strncmp(param, "C ", 2) == 0
+		|| ft_strncmp(param, "SO ", 3) == 0 || ft_strncmp(param, "WE ", 3) == 0
+		|| ft_strncmp(param, "\n", 1) == 0)
+		return (0);
+	return (1);
 }
 
 void	ft_free_split(char **split)
@@ -41,13 +35,13 @@ void	ft_free_split(char **split)
 	free(split);
 }
 
-static int settings_scan(char *buffer)
+static int	settings_scan(char *buffer)
 {
-    if (is_valid_param(buffer) != 0)
-    {
-        return (error_handler("Invalid parameter"), 1);
-    }
-    return (0);
+	if (is_valid_param(buffer) != 0)
+	{
+		return (error_handler("Invalid parameter"), 1);
+	}
+	return (0);
 }
 
 static int	handle_error(char *buffer, int fd, char *msg)
@@ -58,30 +52,36 @@ static int	handle_error(char *buffer, int fd, char *msg)
 	return (1);
 }
 
-static int process_buffer(char *buffer)
+static int	process_buffer(t_base *base, char *buffer)
 {
-    char    **split;
-    int     i;
+	char	**split;
+	int		i;
 
-    i = 0;
-    split = ft_split(buffer, '\n');
-    while (split[i])
-    {
-        if (settings_scan(split[i]) != 0)
-        {
-            ft_free_split(split);
-            return (1);
-        }
-        i++;
-    }
-    ft_free_split(split);
-    return (0);
+	i = 0;
+	split = ft_split(buffer, '\n');
+	while (split[i])
+	{
+		if (settings_scan(split[i]) != 0)
+		{
+			ft_free_split(split);
+			return (1);
+		}
+		fill_textures(base->text, split[i]);
+		if (base->text->set == 1)
+		{
+			printf("textures struct filled \n");
+			break ;
+		}
+		i++;
+	}
+	ft_free_split(split);
+	return (0);
 }
 
-static int read_valid(int fd)
+static int	read_valid(int fd, t_base *base)
 {
-	char *buffer;
-	int b_read;
+	char	*buffer;
+	int		b_read;
 
 	buffer = (char *)malloc(BUFFER_SIZE);
 	if (!buffer)
@@ -90,10 +90,10 @@ static int read_valid(int fd)
 	while (b_read > 0)
 	{
 		buffer[b_read] = '\0';
-		if (process_buffer(buffer) != 0)
+		if (process_buffer(base, buffer) != 0)
 			return (handle_error(buffer, fd, "Settings scan failed"));
 		if (buffer[0] == '\0')
-			break;
+			break ;
 		b_read = read(fd, buffer, BUFFER_SIZE - 1);
 	}
 	if (b_read < 0)
@@ -103,22 +103,37 @@ static int read_valid(int fd)
 	return (0);
 }
 
-char	**read_map_file(char *map_name)
+// static void print_map(char **map)
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	while (map[i])
+// 	{
+// 		printf("%s", map[i]);
+// 		i++;
+// 	}
+// 	printf("\n");
+// }
+
+t_base	*read_map_file(t_base *base)
 {
-	int	fd;
-	char **map;
-	
-	map = NULL;
-	fd = open(map_name, O_RDONLY);
-	if (fd < 0 || !map_name)
+	int		fd;
+
+	fd = open(base->map_name, O_RDONLY);
+	if (fd < 0 || !base->map_name)
 	{
 		perror("Can't open file");
-		return (NULL);	
+		return (NULL);
 	}
 	else
 	{
-		read_valid(fd);
-		map = get_map(map_name);
+		if (read_valid(fd, base))
+			return (NULL);
+		base->data->map = get_map(base->map_name);
+		if (valid_map(base) == 1)
+			return (printf("map de merde\n"), NULL);
+		// print_map(base->data->map);
 	}
-	return (map);
+	return (base);
 }

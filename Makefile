@@ -11,6 +11,8 @@ SRC := src/main.c \
 		src//get_next_line/get_next_line_utils.c \
 		src/process_cub/map_reader.c \
 		src/process_cub/file_reader.c \
+		src/process_cub/struct_handler.c \
+		src/process_cub/parse_map.c \
 		src/error.c \
 
 Y = "\033[33m"
