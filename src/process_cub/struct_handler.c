@@ -6,7 +6,7 @@
 /*   By: abentaye <abentaye@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 13:50:17 by abentaye          #+#    #+#             */
-/*   Updated: 2024/11/15 16:14:02 by abentaye         ###   ########.fr       */
+/*   Updated: 2024/11/28 18:24:29 by abentaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_textures	*fill_textures(t_textures *text, char *param)
 		text->WE = ft_strdup(param);
 	else
 	{
-		error_handler("Error in textures assignement");
+		error_handler("Error");
 		return (NULL);
 	}
 	if (text->NO && text->F && text->EA && text->C && text->SO && text->WE)

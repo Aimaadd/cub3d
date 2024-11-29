@@ -6,7 +6,7 @@
 /*   By: abentaye <abentaye@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 22:03:33 by abentaye          #+#    #+#             */
-/*   Updated: 2024/11/15 16:57:08 by abentaye         ###   ########.fr       */
+/*   Updated: 2024/11/28 19:31:32 by abentaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,24 +33,28 @@
 #define WEST
 #define EAST
 
+#define TILE_SIZE 30
+#define FOV 60
+
 //BUFFER
 #define BUFFER_SIZE 1024
 
+typedef struct s_ray
+{
+	double ray_ngl;
+	double distance;
+	int  flag;
+} t_ray;
 
 typedef struct s_mlx 
 {
 	void	*win;
 	void	*ptr;
+	void	*img;
 	int		width;
+	t_ray	*ray;
 	int		length;
 }	t_mlx;
-
-typedef struct s_player
-{
-	double	pos_x;
-	double	pos_y;
-	double	dir;
-}	t_player;
 
 typedef struct s_textures
 {
@@ -73,14 +77,35 @@ typedef struct s_data
 	char	**map;
 }	t_data;
 
+typedef struct s_map
+{
+	char	**map;
+	int		character;
+	int		closed;
+	int		invalid;
+	
+}	t_map;
+
+typedef struct s_player
+{
+	int		pos_x;
+	int		pos_y;
+	float	angle;
+	float	fov;
+	char	dir;
+}	t_player;
+
 typedef struct s_base
 {
 	char		*map_name;
 	t_player	*player;
+	t_map		*map;
 	t_data		*data;
 	t_mlx		*mlx;
 	t_textures	*text;
 }	t_base;
+
+int init_mlx(t_base *base);
 
 //  ++++++++++++++++ window.c ++++++++++++++++
 
@@ -107,5 +132,9 @@ t_textures *fill_textures(t_textures *text, char *param);
 // +++++++++++++++ parse_map.c ++++++++++++++++++
 
 int valid_map(t_base *base);
+
+// +++++++++++++++ raycast.c ++++++++++++++++++++
+
+void    game_loop(t_base *base);
 
 #endif

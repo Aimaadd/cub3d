@@ -6,7 +6,7 @@
 /*   By: abentaye <abentaye@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 18:39:54 by abentaye          #+#    #+#             */
-/*   Updated: 2024/11/15 16:11:45 by abentaye         ###   ########.fr       */
+/*   Updated: 2024/11/28 18:23:58 by abentaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int	settings_scan(char *buffer)
 {
 	if (is_valid_param(buffer) != 0)
 	{
-		return (error_handler("Invalid parameter"), 1);
+		return (error_handler("Error"), 1);
 	}
 	return (0);
 }
@@ -69,7 +69,6 @@ static int	process_buffer(t_base *base, char *buffer)
 		fill_textures(base->text, split[i]);
 		if (base->text->set == 1)
 		{
-			printf("textures struct filled \n");
 			break ;
 		}
 		i++;
@@ -103,19 +102,6 @@ static int	read_valid(int fd, t_base *base)
 	return (0);
 }
 
-// static void print_map(char **map)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (map[i])
-// 	{
-// 		printf("%s", map[i]);
-// 		i++;
-// 	}
-// 	printf("\n");
-// }
-
 t_base	*read_map_file(t_base *base)
 {
 	int		fd;
@@ -132,8 +118,7 @@ t_base	*read_map_file(t_base *base)
 			return (NULL);
 		base->data->map = get_map(base->map_name);
 		if (valid_map(base) == 1)
-			return (printf("map de merde\n"), NULL);
-		// print_map(base->data->map);
+			return (printf("Error\n"), NULL);
 	}
 	return (base);
 }

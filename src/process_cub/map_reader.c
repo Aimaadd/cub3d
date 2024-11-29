@@ -6,7 +6,7 @@
 /*   By: abentaye <abentaye@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 10:28:18 by abentaye          #+#    #+#             */
-/*   Updated: 2024/11/15 14:26:48 by abentaye         ###   ########.fr       */
+/*   Updated: 2024/11/29 15:06:46 by abentaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,11 @@ static char	*skip_lines(char *line, int fd)
 	int	i;
 
 	i = 0;
-	while (i < 8)
+	while (i < 7)
+	{
+		line = get_next_line(fd);
+		i++;
+	}
 	{
 		line = get_next_line(fd);
 		i++;
@@ -42,13 +46,13 @@ char	**get_map(char *map_name)
 	}
 	map = malloc(sizeof(char *) * 200);
 	if (!map)
-		return (error_handler("Allocation failed"), close(fd), NULL);
+		return (error_handler("Error"), close(fd), NULL);
 	line = skip_lines(line, fd);
 	while (line)
 	{
 		map[i] = malloc(strlen(line) + 1);
 		if (!map[i])
-			return (error_handler("Allocation failed"), close(fd), NULL);
+			return (error_handler("Error"), close(fd), NULL);
 		strcpy(map[i], line);
 		free(line);
 		i++;

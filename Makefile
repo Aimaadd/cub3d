@@ -7,6 +7,7 @@ MLXFLAGS := -L$(MLXPATH) -lmlx -framework OpenGL -framework AppKit
 RM := @rm -f
 SRC := src/main.c \
 		src/display/window.c \
+		src/display/raycast.c \
 		src/get_next_line/get_next_line.c \
 		src//get_next_line/get_next_line_utils.c \
 		src/process_cub/map_reader.c \
