@@ -6,7 +6,7 @@
 /*   By: abentaye <abentaye@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 18:39:54 by abentaye          #+#    #+#             */
-/*   Updated: 2024/11/28 18:23:58 by abentaye         ###   ########.fr       */
+/*   Updated: 2024/11/29 19:29:05 by abentaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ t_base	*read_map_file(t_base *base)
 	{
 		if (read_valid(fd, base))
 			return (NULL);
-		base->data->map = get_map(base->map_name);
+		base->data->map = get_map(base);
 		if (valid_map(base) == 1)
 			return (printf("Error\n"), NULL);
 	}

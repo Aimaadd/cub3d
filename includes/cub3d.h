@@ -6,7 +6,7 @@
 /*   By: abentaye <abentaye@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 22:03:33 by abentaye          #+#    #+#             */
-/*   Updated: 2024/11/28 19:31:32 by abentaye         ###   ########.fr       */
+/*   Updated: 2024/11/29 19:28:54 by abentaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ void	error_handler(char *message);
 
 // +++++++++++++++ map_reader.c +++++++++++++++
 
-char	**get_map(char *map_name);
+char	**get_map(t_base *base);
 
 // +++++++++++++++ struct_handler.c +++++++++++++++
 

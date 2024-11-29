@@ -6,7 +6,7 @@
 /*   By: abentaye <abentaye@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 22:03:31 by abentaye          #+#    #+#             */
-/*   Updated: 2024/11/28 19:31:40 by abentaye         ###   ########.fr       */
+/*   Updated: 2024/11/29 19:22:29 by abentaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,5 @@ int main(int argc, char **argv)
     if (!base->data->map)
         return (free(base->data), free(base->mlx), free(base), 1);
     print_map(base->data->map);
-    game_loop(base);
     return (0);
 }
