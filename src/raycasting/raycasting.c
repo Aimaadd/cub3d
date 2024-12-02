@@ -121,7 +121,7 @@ void raycasting(t_base *base)
                 map_y += step_y;
                 side = 1;
             }
-            if (base->data->map[map_x][map_y] == '1')
+            if (base->data->map[map_x][map_y] == '1' || base->data->map[map_x][map_y] == 'D')
                 hit = 1;
         }
 
@@ -142,8 +142,12 @@ void raycasting(t_base *base)
             draw_end = HEIGHT - 1;
 
         int color = 0xFF0000;
+        if (base->data->map[map_x][map_y] == 'D')
+            color = 0x808080;
+        else if (base->data->map[map_x][map_y] == 'O')
+            color = 0x404040;
         if (side == 1)
-            color = 0x800000;
+            color = color / 2;
 
         draw_vertical_line(base->data, x, draw_start, draw_end, color);
         x++;

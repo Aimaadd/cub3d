@@ -6,7 +6,7 @@
 /*   By: rpepi <rpepi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 22:03:33 by abentaye          #+#    #+#             */
-/*   Updated: 2024/12/02 13:45:34 by rpepi            ###   ########.fr       */
+/*   Updated: 2024/12/02 14:38:43 by rpepi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ typedef struct s_mlx
 	void	*ptr;
 	void	*img;
 	int		width;
+	int		height;
+	int		fullscreen;
 	t_ray	*ray;
 	int		length;
 }	t_mlx;
@@ -160,5 +162,10 @@ void    rotate_left(t_base *base);
 int     handle_keypress(int keycode, t_base *base);
 int     handle_close(t_base *base);
 void    game_loop(t_base *base);
+int		handle_resize(int width, int height, t_base *base);
+
+// +++++++++++++++ doors.c ++++++++++++++++++++
+void    toggle_door(t_base *base);
+int     is_door(char c);
 
 #endif

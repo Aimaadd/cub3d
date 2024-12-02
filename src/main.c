@@ -6,7 +6,7 @@
 /*   By: rpepi <rpepi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 22:03:31 by abentaye          #+#    #+#             */
-/*   Updated: 2024/12/02 13:50:25 by rpepi            ###   ########.fr       */
+/*   Updated: 2024/12/02 14:32:25 by rpepi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,10 @@ int init_mlx(t_base *base)
     base->mlx->ptr = mlx_init();
     if (!base->mlx->ptr)
         return (error_handler("Error"), 1);
-    base->mlx->win = mlx_new_window(base->mlx->ptr, WIDTH, HEIGHT, "cub3D");
+    base->mlx->width = WIDTH;
+    base->mlx->height = HEIGHT;
+    base->mlx->fullscreen = 0;
+    base->mlx->win = mlx_new_window(base->mlx->ptr, base->mlx->width, base->mlx->height, "cub3D");
     if (!base->mlx->win)
         return (error_handler("Error"), 1);
     base->data->img = mlx_new_image(base->mlx->ptr, WIDTH, HEIGHT);
@@ -62,13 +65,15 @@ int main(int argc, char **argv)
 {
     t_base *base;
     char *test_map[] = {
-        "111111111",
-        "100000001",
-        "100N00001",
-        "100000001",
-        "111111111",
-        NULL
-    };
+    "111111111",
+    "100000001",
+    "100000001",
+    "100N00001",
+    "111011111",
+    "100000001",
+    "111111111",
+    NULL
+};
     (void)argc;
     (void)argv;
     base = malloc(sizeof(t_base));
