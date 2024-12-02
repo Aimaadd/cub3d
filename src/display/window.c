@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abentaye <abentaye@student.s19.be>         +#+  +:+       +#+        */
+/*   By: rpepi <rpepi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 15:35:18 by abentaye          #+#    #+#             */
-/*   Updated: 2024/11/28 19:45:07 by abentaye         ###   ########.fr       */
+/*   Updated: 2024/12/02 13:39:24 by rpepi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,6 @@ static int	init_player(t_base *base)
 	base->player->dir = 0;
 	base->player->pos_x = 0;
 	base->player->pos_y = 0;
-	base->player->angle = 0;
-	base->player->fov = 0;
 	return (0);
 }
 

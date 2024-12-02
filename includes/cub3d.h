@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abentaye <abentaye@student.s19.be>         +#+  +:+       +#+        */
+/*   By: rpepi <rpepi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 22:03:33 by abentaye          #+#    #+#             */
-/*   Updated: 2024/11/29 19:28:54 by abentaye         ###   ########.fr       */
+/*   Updated: 2024/12/02 13:45:34 by rpepi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,12 +88,16 @@ typedef struct s_map
 
 typedef struct s_player
 {
-	int		pos_x;
-	int		pos_y;
-	float	angle;
-	float	fov;
-	char	dir;
-}	t_player;
+	double  pos_x;
+	double  pos_y;
+	double  dir_x;     // Direction vecteur X
+	double  dir_y;     // Direction vecteur Y
+	double  plane_x;   // Plan caméra X
+	double  plane_y;   // Plan caméra Y
+	double  move_speed;
+	double  rot_speed;
+	char    dir;       // Direction initiale (N,S,E,W)
+}   t_player;
 
 typedef struct s_base
 {
@@ -135,6 +139,26 @@ int valid_map(t_base *base);
 
 // +++++++++++++++ raycast.c ++++++++++++++++++++
 
+void    init_player_direction(t_player *player);
+void    raycasting(t_base *base);
+void draw_vertical_line(t_data *data, int x, int start, int end, int color);
+
+// +++++++++++++++ moves.c ++++++++++++++++++++
+
+void    move_forward(t_base *base);
+void    move_backward(t_base *base);
+void    move_left(t_base *base);
+void    move_right(t_base *base);
+
+// +++++++++++++++ rotation.c ++++++++++++++++++++
+
+void    rotate_right(t_base *base);
+void    rotate_left(t_base *base);
+
+// +++++++++++++++ events.c ++++++++++++++++++++
+
+int     handle_keypress(int keycode, t_base *base);
+int     handle_close(t_base *base);
 void    game_loop(t_base *base);
 
 #endif

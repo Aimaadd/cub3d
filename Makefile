@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: rpepi <rpepi@student.42.fr>                +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/12/02 13:35:51 by rpepi             #+#    #+#              #
+#    Updated: 2024/12/02 13:35:54 by rpepi            ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 CC := cc
 CFLAGS := -Wall -Wextra -Werror -fsanitize=address -g3
 MLXPATH = ./minilibx
@@ -14,6 +26,10 @@ SRC := src/main.c \
 		src/process_cub/struct_handler.c \
 		src/process_cub/parse_map.c \
 		src/error.c \
+		src/raycasting/raycasting.c \
+		src/raycasting/moves.c \
+		src/raycasting/rotation.c \
+		src/raycasting/events.c \
 
 Y = "\033[33m"
 R = "\033[31m"
