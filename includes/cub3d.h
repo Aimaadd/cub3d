@@ -6,7 +6,7 @@
 /*   By: rpepi <rpepi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 22:03:33 by abentaye          #+#    #+#             */
-/*   Updated: 2024/12/02 14:38:43 by rpepi            ###   ########.fr       */
+/*   Updated: 2024/12/02 15:10:59 by rpepi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,21 +23,19 @@
 # include "../minilibx/mlx.h"
 # include "../src/get_next_line/get_next_line.h"
 
-//RESOLUTION 
-#define WIDTH 1280
-#define HEIGHT 720
+// RESOLUTION 
+# define WIDTH 1280
+# define HEIGHT 720
 
-//WALL TEXTURES
-#define NORTH
-#define SOUTH
-#define WEST
-#define EAST
+// WALL TEXTURES
+# define NORTH_TEXTURE "textures/north.xpm"
+# define SOUTH_TEXTURE "textures/south.xpm"
+# define WEST_TEXTURE "textures/west.xpm"
+# define EAST_TEXTURE "textures/east.xpm"
 
-#define TILE_SIZE 30
-#define FOV 60
-
-//BUFFER
-#define BUFFER_SIZE 1024
+# define TILE_SIZE 30
+# define FOV 60
+# define BUFFER_SIZE 1024
 
 typedef struct s_ray
 {
@@ -111,6 +109,27 @@ typedef struct s_base
 	t_textures	*text;
 }	t_base;
 
+typedef struct s_ray_calc
+{
+	double	camera_x;
+	double	ray_dir_x;
+	double	ray_dir_y;
+	int		map_x;
+	int		map_y;
+	double	side_dist_x;
+	double	side_dist_y;
+	double	delta_dist_x;
+	double	delta_dist_y;
+	double	perp_wall_dist;
+	int		step_x;
+	int		step_y;
+	int		hit;
+	int		side;
+	int		line_height;
+	int		draw_start;
+	int		draw_end;
+}	t_ray_calc;
+
 int init_mlx(t_base *base);
 
 //  ++++++++++++++++ window.c ++++++++++++++++
@@ -141,31 +160,46 @@ int valid_map(t_base *base);
 
 // +++++++++++++++ raycast.c ++++++++++++++++++++
 
-void    init_player_direction(t_player *player);
-void    raycasting(t_base *base);
-void draw_vertical_line(t_data *data, int x, int start, int end, int color);
+void	raycasting(t_base *base);
+void    init_ray_dir(t_base *base, t_ray_calc *rc, int x);
+void    calc_step_dist(t_ray_calc *rc, t_player *player);
+void    perform_dda(t_ray_calc *rc, t_base *base);
+void    calc_wall_height(t_ray_calc *rc);
 
 // +++++++++++++++ moves.c ++++++++++++++++++++
 
-void    move_forward(t_base *base);
-void    move_backward(t_base *base);
-void    move_left(t_base *base);
-void    move_right(t_base *base);
+void	move_forward(t_base *base);
+void	move_backward(t_base *base);
+void	move_left(t_base *base);
+void	move_right(t_base *base);
 
 // +++++++++++++++ rotation.c ++++++++++++++++++++
 
-void    rotate_right(t_base *base);
-void    rotate_left(t_base *base);
+void	rotate_right(t_base *base);
+void	rotate_left(t_base *base);
 
 // +++++++++++++++ events.c ++++++++++++++++++++
 
-int     handle_keypress(int keycode, t_base *base);
-int     handle_close(t_base *base);
-void    game_loop(t_base *base);
+void	clean_exit(t_base *base);
+int		handle_keypress(int keycode, t_base *base);
+int		handle_close(t_base *base);
+int		handle_mouse_move(int x, int y, t_base *base);
 int		handle_resize(int width, int height, t_base *base);
+void	game_loop(t_base *base);
 
 // +++++++++++++++ doors.c ++++++++++++++++++++
-void    toggle_door(t_base *base);
-int     is_door(char c);
+void	toggle_door(t_base *base);
+int		is_door(char c);
+
+// +++++++++++++++ init.c ++++++++++++++++++++
+
+void	init_player_direction(t_player *player);
+void	draw_vertical_line(t_data *data, int x, int start, int end, int color);
+
+// +++++++++++++++ texture.c ++++++++++++++++++++
+
+int		load_textures(t_base *base);
+void	draw_textured_line(t_data *data, int x, int start, int end, \
+		t_textures *text, int tex_x);
 
 #endif

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   events.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rpepi <rpepi@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/02 14:48:12 by rpepi             #+#    #+#             */
+/*   Updated: 2024/12/02 15:12:54 by rpepi            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub3d.h"
 
 void clean_exit(t_base *base)
@@ -90,17 +102,3 @@ int handle_resize(int width, int height, t_base *base)
     raycasting(base);
     return (0);
 }
-
-void    game_loop(t_base *base)
-{
-    init_player_direction(base->player);
-    
-    raycasting(base);
-    
-    mlx_hook(base->mlx->win, 2, 1L<<0, handle_keypress, base);
-    mlx_hook(base->mlx->win, 6, 1L<<6, handle_mouse_move, base);
-    mlx_hook(base->mlx->win, 17, 1L<<17, handle_close, base);
-    mlx_hook(base->mlx->win, 25, 1L<<25, handle_resize, base);
-    
-    mlx_loop(base->mlx->ptr);
-} 

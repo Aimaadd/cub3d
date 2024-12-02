@@ -6,11 +6,12 @@
 /*   By: rpepi <rpepi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 15:35:18 by abentaye          #+#    #+#             */
-/*   Updated: 2024/12/02 13:39:24 by rpepi            ###   ########.fr       */
+/*   Updated: 2024/12/02 14:56:39 by rpepi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+#include <mlx.h>
 
 static int	init_base_data(t_base *base)
 {

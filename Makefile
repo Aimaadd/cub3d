@@ -6,7 +6,7 @@
 #    By: rpepi <rpepi@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/02 13:35:51 by rpepi             #+#    #+#              #
-#    Updated: 2024/12/02 14:13:10 by rpepi            ###   ########.fr        #
+#    Updated: 2024/12/02 15:06:36 by rpepi            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,9 +26,14 @@ SRC := src/main.c \
 		src/process_cub/struct_handler.c \
 		src/process_cub/parse_map.c \
 		src/error.c \
-		src/raycasting/raycasting.c \
-		src/raycasting/moves.c \
+		src/raycasting/raycast/raycasting.c \
+		src/raycasting/raycast/raycasting_calc.c \
+		src/raycasting/raycast/raycasting_dda.c \
+		src/raycasting/raycast/raycasting_render.c \
+		src/raycasting/moves/moves_forward.c \
+		src/raycasting/moves/moves_strafe.c \
 		src/raycasting/rotation.c \
+		src/raycasting/game_loop.c \
 		src/raycasting/events.c \
 		src/raycasting/doors.c
 
