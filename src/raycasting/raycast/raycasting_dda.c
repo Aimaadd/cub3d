@@ -6,7 +6,7 @@
 /*   By: rpepi <rpepi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 15:01:00 by rpepi             #+#    #+#             */
-/*   Updated: 2024/12/02 15:12:32 by rpepi            ###   ########.fr       */
+/*   Updated: 2024/12/05 15:58:56 by rpepi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,7 @@ void	perform_dda(t_ray_calc *rc, t_base *base)
 			rc->map_y += rc->step_y;
 			rc->side = 1;
 		}
-		if (base->data->map[rc->map_x][rc->map_y] == '1' || \
-			base->data->map[rc->map_x][rc->map_y] == 'D')
+		if (base->data->map[rc->map_x][rc->map_y] == '1')
 			rc->hit = 1;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: rpepi <rpepi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 14:48:12 by rpepi             #+#    #+#             */
-/*   Updated: 2024/12/02 15:12:54 by rpepi            ###   ########.fr       */
+/*   Updated: 2024/12/05 16:04:07 by rpepi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 
 void clean_exit(t_base *base)
 {
+    // Arrêter tous les processus enfants (y compris la musique)
+    kill(0, SIGTERM);
+    
     if (base->mlx->win)
         mlx_destroy_window(base->mlx->ptr, base->mlx->win);
     if (base->data->img)
@@ -43,9 +46,6 @@ int handle_keypress(int keycode, t_base *base)
         rotate_right(base);
     else if (keycode == 53)                   // ESC
         clean_exit(base);
-    else if (keycode == 14)                   // E pour interagir avec portes
-        toggle_door(base);
-    
     mlx_clear_window(base->mlx->ptr, base->mlx->win);
     raycasting(base);
     return (0);
@@ -102,3 +102,4 @@ int handle_resize(int width, int height, t_base *base)
     raycasting(base);
     return (0);
 }
+

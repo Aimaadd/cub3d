@@ -6,7 +6,7 @@
 /*   By: rpepi <rpepi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 15:02:34 by rpepi             #+#    #+#             */
-/*   Updated: 2024/12/02 15:05:30 by rpepi            ###   ########.fr       */
+/*   Updated: 2024/12/05 15:59:06 by rpepi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int	check_collision_x(t_base *base, double new_x)
 	char	next_pos;
 
 	next_pos = base->data->map[(int)new_x][(int)base->player->pos_y];
-	return (next_pos != '1' && next_pos != 'D');
+	return (next_pos != '1');
 }
 
 static int	check_collision_y(t_base *base, double new_y)
@@ -25,7 +25,7 @@ static int	check_collision_y(t_base *base, double new_y)
 	char	next_pos;
 
 	next_pos = base->data->map[(int)base->player->pos_x][(int)new_y];
-	return (next_pos != '1' && next_pos != 'D');
+	return (next_pos != '1');
 }
 
 void	move_left(t_base *base)

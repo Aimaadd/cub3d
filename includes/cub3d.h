@@ -6,7 +6,7 @@
 /*   By: rpepi <rpepi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 22:03:33 by abentaye          #+#    #+#             */
-/*   Updated: 2024/12/02 15:10:59 by rpepi            ###   ########.fr       */
+/*   Updated: 2024/12/05 16:03:48 by rpepi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 # include <fcntl.h>
 # include "../minilibx/mlx.h"
 # include "../src/get_next_line/get_next_line.h"
+# include <sys/types.h>
+# include <signal.h>
 
 // RESOLUTION 
 # define WIDTH 1280
@@ -58,14 +60,14 @@ typedef struct s_mlx
 
 typedef struct s_textures
 {
-	char	*NO;
-	char	*SO;
-	char	*WE;
-	char	*EA;
-	char	*F;
-	char	*C;
-	int		set;
-}	t_textures;
+	char    *NO;
+	char    *SO;
+	char    *WE;
+	char    *EA;
+	char    *F;
+	char    *C;
+	int     set;
+}   t_textures;
 
 typedef struct s_data
 {
@@ -81,7 +83,7 @@ typedef struct s_map
 {
 	char	**map;
 	int		character;
-	int		closed;
+	int			closed;
 	int		invalid;
 	
 }	t_map;

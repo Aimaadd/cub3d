@@ -6,7 +6,7 @@
 #    By: rpepi <rpepi@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/02 13:35:51 by rpepi             #+#    #+#              #
-#    Updated: 2024/12/02 15:06:36 by rpepi            ###   ########.fr        #
+#    Updated: 2024/12/05 16:04:59 by rpepi            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,6 @@ SRC := src/main.c \
 		src/raycasting/rotation.c \
 		src/raycasting/game_loop.c \
 		src/raycasting/events.c \
-		src/raycasting/doors.c
 
 Y = "\033[33m"
 R = "\033[31m"

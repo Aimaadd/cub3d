@@ -6,7 +6,7 @@
 /*   By: rpepi <rpepi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 22:03:31 by abentaye          #+#    #+#             */
-/*   Updated: 2024/12/02 14:32:25 by rpepi            ###   ########.fr       */
+/*   Updated: 2024/12/05 16:05:46 by rpepi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ int init_mlx(t_base *base)
         return (error_handler("Error"), 1);
     base->mlx->width = WIDTH;
     base->mlx->height = HEIGHT;
-    base->mlx->fullscreen = 0;
     base->mlx->win = mlx_new_window(base->mlx->ptr, base->mlx->width, base->mlx->height, "cub3D");
     if (!base->mlx->win)
         return (error_handler("Error"), 1);
@@ -71,9 +70,24 @@ int main(int argc, char **argv)
     "100N00001",
     "111011111",
     "100000001",
+    "100000001",
     "111111111",
     NULL
 };
+    pid_t pid;
+    
+    // Lancer le script de musique en arrière-plan
+    pid = fork();
+    if (pid == 0) {
+        // Processus enfant
+        char *music_args[] = {"afplay", "./music/music.mp3", NULL};
+        execvp("afplay", music_args);
+        perror("Erreur lors du lancement de la musique");
+        exit(1);
+    } else if (pid < 0) {
+        perror("Erreur lors du fork");
+    }
+    
     (void)argc;
     (void)argv;
     base = malloc(sizeof(t_base));
@@ -95,6 +109,7 @@ int main(int argc, char **argv)
            base->player->pos_y, 
            base->player->dir);
     game_loop(base);
+    
     // Libération de la mémoire
     free(base->mlx);
     free(base->data);
@@ -102,5 +117,9 @@ int main(int argc, char **argv)
     free(base->map);
     free(base->text);
     free(base);
+    
+    // Arrêter la musique
+    if (pid > 0)
+        kill(pid, SIGTERM);
     return (0);
 }
