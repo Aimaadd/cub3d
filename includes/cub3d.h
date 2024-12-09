@@ -6,7 +6,7 @@
 /*   By: abentaye <abentaye@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 22:03:33 by abentaye          #+#    #+#             */
-/*   Updated: 2024/11/29 19:28:54 by abentaye         ###   ########.fr       */
+/*   Updated: 2024/12/09 18:46:24 by abentaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <stdlib.h>
 # include <string.h>
 # include <fcntl.h>
+# include <stdbool.h>
 # include "../minilibx/mlx.h"
 # include "../src/get_next_line/get_next_line.h"
 
@@ -39,12 +40,11 @@
 //BUFFER
 #define BUFFER_SIZE 1024
 
-typedef struct s_ray
-{
-	double ray_ngl;
-	double distance;
-	int  flag;
-} t_ray;
+typedef struct s_fparams {
+	char **map;
+	int rows;
+	bool **visited;
+}	t_fparams;
 
 typedef struct s_mlx 
 {
@@ -52,7 +52,6 @@ typedef struct s_mlx
 	void	*ptr;
 	void	*img;
 	int		width;
-	t_ray	*ray;
 	int		length;
 }	t_mlx;
 
@@ -83,7 +82,8 @@ typedef struct s_map
 	int		character;
 	int		closed;
 	int		invalid;
-	
+	t_fparams fparams;
+
 }	t_map;
 
 typedef struct s_player
@@ -136,5 +136,9 @@ int valid_map(t_base *base);
 // +++++++++++++++ raycast.c ++++++++++++++++++++
 
 void    game_loop(t_base *base);
+
+// +++++++++++++++ dfs_algorithm.c ++++++++++++++++++++
+
+int floodfill(t_base *base);
 
 #endif
