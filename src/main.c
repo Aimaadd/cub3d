@@ -6,7 +6,7 @@
 /*   By: abentaye <abentaye@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 22:03:31 by abentaye          #+#    #+#             */
-/*   Updated: 2024/11/29 19:22:29 by abentaye         ###   ########.fr       */
+/*   Updated: 2024/12/12 12:29:08 by abentaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,6 @@ int main(int argc, char **argv)
     display_text(base->text);
     if (!base->data->map)
         return (free(base->data), free(base->mlx), free(base), 1);
-    print_map(base->data->map);
+    // print_map(base->data->map);
     return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: abentaye <abentaye@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 14:07:15 by abentaye          #+#    #+#             */
-/*   Updated: 2024/12/09 22:00:28 by abentaye         ###   ########.fr       */
+/*   Updated: 2024/12/12 13:18:19 by abentaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static int read_map(t_base *base)
         return (1);
     if (base->map->character == 0)
         return (1);
-    return (printf("map is valid\n"), 0);
+    return (0);
 }
 
 void print_mapp(char **map) {
@@ -64,9 +64,8 @@ void print_mapp(char **map) {
 
 static int map_check(t_base *base)
 {   
-    print_mapp(base->data->map);
     if (floodfill(base) == 0)
-        printf("\nbien joué\n");
+        print_mapp(base->data->map);
     else
         return (printf("\nmap isn't closed\n"), exit(1), 1);
     return (0);
@@ -78,7 +77,5 @@ int valid_map(t_base *base)
         return (1);
     if (map_check(base) == 1)
         return (1);
-    // if (map_infos(base) == 1)
-    //     return (1);
     return (0);
 }

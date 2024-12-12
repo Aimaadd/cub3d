@@ -6,7 +6,7 @@
 /*   By: abentaye <abentaye@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 22:03:33 by abentaye          #+#    #+#             */
-/*   Updated: 2024/12/09 18:46:24 by abentaye         ###   ########.fr       */
+/*   Updated: 2024/12/12 11:36:01 by abentaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@
 # include <stdbool.h>
 # include "../minilibx/mlx.h"
 # include "../src/get_next_line/get_next_line.h"
+
+#define FILE_OK 42
+#define FILE_ERR 21
 
 //RESOLUTION 
 #define WIDTH 1280
@@ -127,6 +130,7 @@ char	**get_map(t_base *base);
 // +++++++++++++++ struct_handler.c +++++++++++++++
 
 t_textures *fill_textures(t_textures *text, char *param);
+int  text_checker(t_textures *text);
 
 
 // +++++++++++++++ parse_map.c ++++++++++++++++++

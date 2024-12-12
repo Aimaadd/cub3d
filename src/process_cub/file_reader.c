@@ -6,7 +6,7 @@
 /*   By: abentaye <abentaye@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 18:39:54 by abentaye          #+#    #+#             */
-/*   Updated: 2024/11/29 19:29:05 by abentaye         ###   ########.fr       */
+/*   Updated: 2024/12/12 13:17:04 by abentaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,7 @@ static int	process_buffer(t_base *base, char *buffer)
 		}
 		fill_textures(base->text, split[i]);
 		if (base->text->set == 1)
-		{
 			break ;
-		}
 		i++;
 	}
 	ft_free_split(split);
@@ -120,5 +118,6 @@ t_base	*read_map_file(t_base *base)
 		if (valid_map(base) == 1)
 			return (printf("Error\n"), NULL);
 	}
+	close(fd);
 	return (base);
 }
