@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abentaye <abentaye@student.s19.be>         +#+  +:+       +#+        */
+/*   By: abentaye <abentaye@student.s19.b\e>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 22:03:31 by abentaye          #+#    #+#             */
-/*   Updated: 2024/12/12 12:29:08 by abentaye         ###   ########.fr       */
+/*   Updated: 2024/12/12 15:09:19 by abentaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void    print_map(char **map)
     int i;
 
     i = 0;
+    printf ("\nPRINTING MAP\n");
     while (map[i])
     {
         printf("%s", map[i]);

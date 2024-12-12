@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abentaye <abentaye@student.s19.be>         +#+  +:+       +#+        */
+/*   By: abentaye <abentaye@student.s19.b\e>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 14:07:15 by abentaye          #+#    #+#             */
-/*   Updated: 2024/12/12 13:18:19 by abentaye         ###   ########.fr       */
+/*   Updated: 2024/12/12 15:09:08 by abentaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,12 @@ static int read_map(t_base *base)
 
 void print_mapp(char **map) {
     int i = 0;
+    printf("PRINTING FLOODFILLED MAP -------------\n");
     while (map[i]) {
         printf("%s", map[i]);
         i++;
     }
+    printf("\n--------------------------\n");
 }
 
 static int map_check(t_base *base)
