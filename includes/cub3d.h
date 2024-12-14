@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abentaye <abentaye@student.s19.be>         +#+  +:+       +#+        */
+/*   By: abentaye <abentaye@student.s19.b\e>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 22:03:33 by abentaye          #+#    #+#             */
-/*   Updated: 2024/12/12 11:36:01 by abentaye         ###   ########.fr       */
+/*   Updated: 2024/12/14 16:26:33 by abentaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,12 @@
 //BUFFER
 #define BUFFER_SIZE 1024
 
-typedef struct s_fparams {
-	char **map;
-	int rows;
-	bool **visited;
-}	t_fparams;
+typedef struct s_params {
+    char    new_color;
+    char    old_color;
+    int     cols;
+	int		rows;
+}	t_params;
 
 typedef struct s_mlx 
 {
@@ -81,11 +82,11 @@ typedef struct s_data
 
 typedef struct s_map
 {
-	char	**map;
-	int		character;
-	int		closed;
-	int		invalid;
-	t_fparams fparams;
+	char		**map;
+	int			character;
+	int			closed;
+	int			invalid;
+	t_params	*fparams;
 
 }	t_map;
 
@@ -121,7 +122,8 @@ void	ft_free_split(char **split);
 
 // ++++++++++++++++ error.c +++++++++++++++++++
 
-void	error_handler(char *message);
+void	free_all(t_base *base);
+void 	free_text(t_textures *text);
 
 // +++++++++++++++ map_reader.c +++++++++++++++
 
@@ -144,5 +146,9 @@ void    game_loop(t_base *base);
 // +++++++++++++++ dfs_algorithm.c ++++++++++++++++++++
 
 int floodfill(t_base *base);
+
+// +++++++++++++++ helper.c ++++++++++++++++++++
+
+void	ft_free_split(char **split);
 
 #endif

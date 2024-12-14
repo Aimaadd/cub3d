@@ -3,54 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   file_reader.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abentaye <abentaye@student.s19.be>         +#+  +:+       +#+        */
+/*   By: abentaye <abentaye@student.s19.b\e>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 18:39:54 by abentaye          #+#    #+#             */
-/*   Updated: 2024/12/12 13:17:04 by abentaye         ###   ########.fr       */
+/*   Updated: 2024/12/14 17:39:22 by abentaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-static int	is_valid_param(char *param)
-{
-	if (ft_strncmp(param, "NO ", 3) == 0 || ft_strncmp(param, "F ", 2) == 0
-		|| ft_strncmp(param, "EA ", 3) == 0 || ft_strncmp(param, "C ", 2) == 0
-		|| ft_strncmp(param, "SO ", 3) == 0 || ft_strncmp(param, "WE ", 3) == 0
-		|| ft_strncmp(param, "\n", 1) == 0)
-		return (0);
-	return (1);
-}
+// static int	is_valid_param(char *param)
+// {
+// 	if (ft_strncmp(param, "NO ", 3) == 0 || ft_strncmp(param, "F ", 2) == 0
+// 		|| ft_strncmp(param, "EA ", 3) == 0 || ft_strncmp(param, "C ", 2) == 0
+// 		|| ft_strncmp(param, "SO ", 3) == 0 || ft_strncmp(param, "WE ", 3) == 0
+// 		|| ft_strncmp(param, "\n", 1) == 0)
+// 		return (0);
+// 	return (1);
+// }
 
-void	ft_free_split(char **split)
-{
-	int	i;
-
-	i = 0;
-	while (split[i])
-	{
-		free(split[i]);
-		i++;
-	}
-	free(split);
-}
-
-static int	settings_scan(char *buffer)
-{
-	if (is_valid_param(buffer) != 0)
-	{
-		return (error_handler("Error"), 1);
-	}
-	return (0);
-}
-
-static int	handle_error(char *buffer, int fd, char *msg)
-{
-	free(buffer);
-	close(fd);
-	error_handler(msg);
-	return (1);
-}
+// static int	settings_scan(char *buffer)
+// {
+// 	if (is_valid_param(buffer) != 0)
+// 	{
+// 		return (1);
+// 	}
+// 	return (0);
+// }
 
 static int	process_buffer(t_base *base, char *buffer)
 {
@@ -61,15 +40,20 @@ static int	process_buffer(t_base *base, char *buffer)
 	split = ft_split(buffer, '\n');
 	while (split[i])
 	{
-		if (settings_scan(split[i]) != 0)
-		{
-			ft_free_split(split);
-			return (1);
-		}
+		// if (settings_scan(split[i]) != 0)
+		// {
+		// 	free_all(base);
+		// 	return (1);
+		// }
 		fill_textures(base->text, split[i]);
 		if (base->text->set == 1)
 			break ;
 		i++;
+	}
+	if (text_checker(base->text) == 1)
+	{
+		ft_free_split(split);
+		return (printf("wrong text\n"), exit(1), 1);
 	}
 	ft_free_split(split);
 	return (0);
@@ -82,19 +66,19 @@ static int	read_valid(int fd, t_base *base)
 
 	buffer = (char *)malloc(BUFFER_SIZE);
 	if (!buffer)
-		return (handle_error(buffer, fd, "Allocation failed"));
+		return (free_all(base), 1);
 	b_read = read(fd, buffer, BUFFER_SIZE - 1);
 	while (b_read > 0)
 	{
 		buffer[b_read] = '\0';
 		if (process_buffer(base, buffer) != 0)
-			return (handle_error(buffer, fd, "Settings scan failed"));
+			return (free_all(base), 1);
 		if (buffer[0] == '\0')
 			break ;
 		b_read = read(fd, buffer, BUFFER_SIZE - 1);
 	}
 	if (b_read < 0)
-		return (handle_error(buffer, fd, "Can't open operation file"));
+		return (free_all(base), 1);
 	free(buffer);
 	close(fd);
 	return (0);
@@ -115,8 +99,11 @@ t_base	*read_map_file(t_base *base)
 		if (read_valid(fd, base))
 			return (NULL);
 		base->data->map = get_map(base);
-		if (valid_map(base) == 1)
-			return (printf("Error\n"), NULL);
+		if (base->data->map)
+		{
+			if (valid_map(base) == 1)
+				return (NULL);
+		}
 	}
 	close(fd);
 	return (base);

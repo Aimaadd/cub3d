@@ -6,7 +6,7 @@
 /*   By: abentaye <abentaye@student.s19.b\e>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 10:28:18 by abentaye          #+#    #+#             */
-/*   Updated: 2024/12/12 15:21:41 by abentaye         ###   ########.fr       */
+/*   Updated: 2024/12/14 17:47:58 by abentaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static char	**allocate_map(int size)
 	map = malloc(sizeof(char *) * size);
 	if (!map)
 	{
-		error_handler("Error allocating memory for map");
+		write(1, "Error\n", 6);
 		return (NULL);
 	}
 	return (map);
@@ -75,13 +75,12 @@ char	**get_map(t_base *base)
 	if (!map)
 		return (close(fd), NULL);
 	if (!skip_lines(fd, 7))
-		return (free(map), close(fd), NULL);
+		return (free_all(base), NULL);
 	map_size = read_map_lines(fd, map);
 	if (map_size == 0)
 	{
-		free(map);
 		close(fd);
-		return (error_handler("Error reading map lines"), NULL);
+		return (free_all(base), NULL);
 	}
 	close(fd);
 	return (map);

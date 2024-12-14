@@ -6,11 +6,25 @@
 /*   By: abentaye <abentaye@student.s19.b\e>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 13:50:17 by abentaye          #+#    #+#             */
-/*   Updated: 2024/12/12 15:14:22 by abentaye         ###   ########.fr       */
+/*   Updated: 2024/12/13 19:06:53 by abentaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+
+int	text_checker(t_textures *text)
+{
+	if ((open(text->NO, O_RDONLY)) == -1)
+		return (printf("error texutre\n"), 1);
+	if ((open(text->EA, O_RDONLY)) == -1)
+		return (printf("error texutre\n"), 1);
+	if ((open(text->SO, O_RDONLY)) == -1)
+		return (printf("error texutre\n"), 1);
+	if ((open(text->WE, O_RDONLY)) == -1)
+		return (printf("error texutre\n"), 1);
+	printf("Textures are valid\n");
+	return (0);
+}
 
 static int	ft_isspace(int c)
 {
@@ -21,28 +35,28 @@ static int	ft_isspace(int c)
 	return (0);
 }
 
-char *param_format(char *param)
+char	*param_format(char *param)
 {
-    int	i;
-    int	j;
-    char *formed;
+	int		i;
+	int		j;
+	char	*formed;
 
-    formed = (char *)malloc(strlen(param) - 1);
-    i = 2;
-    j = 0;
-    while (param[i])
-    {
-        if (param[i] == '\n')
-            break;
-        if (ft_isspace(param[i]) == 0)
-        {
-            formed[j] = param[i];
-            j++;
-        }
-        i++;
-    }
-    formed[j] = '\0';
-    return (formed);
+	formed = (char *)malloc(strlen(param) - 1);
+	i = 2;
+	j = 0;
+	while (param[i])
+	{
+		if (param[i] == '\n')
+			break ;
+		if (ft_isspace(param[i]) == 0)
+		{
+			formed[j] = param[i];
+			j++;
+		}
+		i++;
+	}
+	formed[j] = '\0';
+	return (formed);
 }
 
 t_textures	*fill_textures(t_textures *text, char *param)
@@ -63,7 +77,7 @@ t_textures	*fill_textures(t_textures *text, char *param)
 		text->C = param_format(param);
 	else
 	{
-		error_handler("Error");
+		free_text(text);
 		return (NULL);
 	}
 	if (text->NO && text->EA && text->SO && text->WE && text->F && text->C)

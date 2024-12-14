@@ -1,5 +1,5 @@
 CC := cc
-CFLAGS := -Wall -Wextra -Werror -g
+CFLAGS := -Wall -Wextra -Werror -g -fsanitize=address
 MLXPATH = ./minilibx
 LIBFT = ./libft
 LIBFTA = ./libft/libft.a
@@ -15,6 +15,7 @@ SRC := src/main.c \
 		src/process_cub/parse_map.c \
 		src/error.c \
 		src/process_cub/dfs_algorithm.c \
+		src/helper.c \
 
 Y = "\033[33m"
 R = "\033[31m"

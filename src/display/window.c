@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abentaye <abentaye@student.s19.be>         +#+  +:+       +#+        */
+/*   By: abentaye <abentaye@student.s19.b\e>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 15:35:18 by abentaye          #+#    #+#             */
-/*   Updated: 2024/11/28 19:45:07 by abentaye         ###   ########.fr       */
+/*   Updated: 2024/12/14 15:49:25 by abentaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,12 @@ static int	init_base_data(t_base *base)
 	base->data->img = NULL;
 	base->data->line_length = 0;
 	base->data->map = NULL;
+	base->map->fparams = malloc(sizeof(t_params));
+	if (!base->map->fparams)
+		return (1);
+	base->map->fparams->cols = 0;
+	base->map->fparams->new_color = 0;
+	base->map->fparams->old_color = 0;
 	return (0);
 }
 
@@ -69,30 +75,15 @@ void	initialization(t_base *base, char **argv)
 {
 	base->map_name = argv[1];
 	if (init_player(base) == 1)
-		error_handler("Error");
+		free_all(base);
 	if (init_map(base) == 1)
-	{
-		free(base->player);
-		error_handler("Error");
-	}
+		free_all(base);
 	if (init_base_data(base) == 1)
-		error_handler("Error");
+		free_all(base);
 	if (!base->data)
-	{
-		free(base);
-		error_handler("Error");
-	}
+		free_all(base);
 	if (init_text(base) == 1)
-	{
-		free(base->data);
-		free(base);
-		error_handler("Error");
-	}
+		free_all(base);
 	if (init_mlx(base) == 1)
-	{
-		free(base->text);
-		free(base->data);
-		free(base);
-		error_handler("Error");
-	}
+		free_all(base);
 }
