@@ -6,7 +6,7 @@
 /*   By: abentaye <abentaye@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 18:39:54 by abentaye          #+#    #+#             */
-/*   Updated: 2024/12/16 12:03:55 by abentaye         ###   ########.fr       */
+/*   Updated: 2024/12/16 16:11:04 by abentaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,23 +31,22 @@
 // 	return (0);
 // }
 
-int size_map(char **split, int i)
+int	size_map(char **split, int i)
 {
-	int j;
+	int	j;
 
 	j = 0;
 	while (split[j])
 		j++;
-	return (j - i + 1); //pour le NULL il faut rajouter 1 !
+	return (j - i + 1);
 }
 
-char **new_get_map(t_base *base, char **split, int i)
+char	**new_get_map(t_base *base, char **split, int i)
 {
 	char	**map;
 	int		j;
 
 	j = 0;
-	// printf("size of map : %d\n", size_map(split, i));
 	map = malloc(sizeof(char *) * size_map(split, i));
 	while (split[i])
 	{
@@ -80,11 +79,6 @@ static int	process_buffer(t_base *base, char *buffer)
 	split = ft_split(buffer, '\n');
 	while (split[i])
 	{
-		// if (settings_scan(split[i]) != 0)
-		// {
-		// 	free_all(base);
-		// 	return (1);
-		// }
 		fill_textures(base->text, split[i]);
 		if (base->text->set == 1)
 			break ;
@@ -96,7 +90,6 @@ static int	process_buffer(t_base *base, char *buffer)
 		return (printf("wrong text\n"), exit(1), -1);
 	}
 	base->data->map = new_get_map(base, split, i + 1);
-	// ft_free_split(split);
 	return (i);
 }
 
