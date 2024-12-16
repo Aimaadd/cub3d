@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abentaye <abentaye@student.s19.b\e>        +#+  +:+       +#+        */
+/*   By: pepi <pepi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 15:35:18 by abentaye          #+#    #+#             */
-/*   Updated: 2024/12/14 15:49:25 by abentaye         ###   ########.fr       */
+/*   Updated: 2024/12/16 15:11:26 by pepi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,5 @@ void	initialization(t_base *base, char **argv)
 	if (!base->data)
 		free_all(base);
 	if (init_text(base) == 1)
-		free_all(base);
-	if (init_mlx(base) == 1)
 		free_all(base);
 }

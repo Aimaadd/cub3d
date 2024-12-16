@@ -6,7 +6,7 @@
 /*   By: pepi <pepi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 22:03:33 by abentaye          #+#    #+#             */
-/*   Updated: 2024/12/16 14:58:56 by pepi             ###   ########.fr       */
+/*   Updated: 2024/12/16 15:26:45 by pepi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,7 +204,8 @@ void    init_ray_dir(t_base *base, t_ray_calc *rc, int x);
 void    calc_step_dist(t_ray_calc *rc, t_player *player);
 void    perform_dda(t_ray_calc *rc, t_base *base);
 void    calc_wall_height(t_ray_calc *rc);
-
+void    render_wall(t_base *base, t_ray_calc *rc, int x);
+void    draw_background(t_base *base);
 // +++++++++++++++ moves.c ++++++++++++++++++++
 
 void	move_forward(t_base *base);
@@ -240,6 +241,13 @@ void	draw_vertical_line(t_data *data, int x, int start, int end, int color);
 
 int		load_textures(t_base *base);
 void	draw_textured_line(t_data *data, int x, int start, int end, \
-		t_textures *text, int tex_x);
+		t_texture_data *tex, int tex_x);
+void	free_textures(t_base *base);
+int		verify_texture_dimensions(t_base *base);
+
+// +++++++++++++++ utils.c ++++++++++++++++++++
+
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+int		init_textures_and_mlx(t_base *base);
 
 #endif

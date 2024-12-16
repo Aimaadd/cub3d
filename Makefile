@@ -25,7 +25,9 @@ SRC := src/main.c \
 		src/raycasting/events.c \
 		src/raycasting/rotation.c \
 		src/raycasting/game_loop.c \
-		src/music.c
+		src/music.c \
+		src/texture.c \
+		src/utils.c
 
 Y = "\033[33m"
 R = "\033[31m"

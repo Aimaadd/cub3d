@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abentaye <abentaye@student.s19.be>         +#+  +:+       +#+        */
+/*   By: pepi <pepi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 19:18:28 by abentaye          #+#    #+#             */
-/*   Updated: 2024/12/16 11:39:34 by abentaye         ###   ########.fr       */
+/*   Updated: 2024/12/16 15:01:23 by pepi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,20 @@ void	free_all(t_base *base)
 		free_text(base->text);
 		free(base->text);
 	}
+	free_textures(base);
 	write(1, "Error\n", 6);
-	free(base);
 	exit(1);
+}
+
+void free_textures(t_base *base)
+{
+	int i;
+
+	i = 0;
+	while (i < 4)
+	{
+		if (base->textures[i].img)
+			mlx_destroy_image(base->mlx->ptr, base->textures[i].img);
+		i++;
+	}
 }
