@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file_reader.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abentaye <abentaye@student.s19.b\e>        +#+  +:+       +#+        */
+/*   By: abentaye <abentaye@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 18:39:54 by abentaye          #+#    #+#             */
-/*   Updated: 2024/12/14 17:39:22 by abentaye         ###   ########.fr       */
+/*   Updated: 2024/12/16 12:03:55 by abentaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,46 @@
 // 	return (0);
 // }
 
+int size_map(char **split, int i)
+{
+	int j;
+
+	j = 0;
+	while (split[j])
+		j++;
+	return (j - i + 1); //pour le NULL il faut rajouter 1 !
+}
+
+char **new_get_map(t_base *base, char **split, int i)
+{
+	char	**map;
+	int		j;
+
+	j = 0;
+	// printf("size of map : %d\n", size_map(split, i));
+	map = malloc(sizeof(char *) * size_map(split, i));
+	while (split[i])
+	{
+		if (split[i][0] == '\n')
+			i++;
+		map[j] = malloc(sizeof(char *) * ft_strlen(split[i]) + 1);
+		map[j] = split[i];
+		if (!map[j])
+			return (free_all(base), NULL);
+		i++;
+		j++;
+	}
+	map[j] = NULL;
+	printf("MAP\n");
+	j = 0;
+	while (map[j])
+	{
+		printf("%s\n", map[j]);
+		j++;
+	}
+	return (map);
+}
+
 static int	process_buffer(t_base *base, char *buffer)
 {
 	char	**split;
@@ -53,10 +93,11 @@ static int	process_buffer(t_base *base, char *buffer)
 	if (text_checker(base->text) == 1)
 	{
 		ft_free_split(split);
-		return (printf("wrong text\n"), exit(1), 1);
+		return (printf("wrong text\n"), exit(1), -1);
 	}
-	ft_free_split(split);
-	return (0);
+	base->data->map = new_get_map(base, split, i + 1);
+	// ft_free_split(split);
+	return (i);
 }
 
 static int	read_valid(int fd, t_base *base)
@@ -71,7 +112,7 @@ static int	read_valid(int fd, t_base *base)
 	while (b_read > 0)
 	{
 		buffer[b_read] = '\0';
-		if (process_buffer(base, buffer) != 0)
+		if (process_buffer(base, buffer) == -1)
 			return (free_all(base), 1);
 		if (buffer[0] == '\0')
 			break ;
@@ -98,11 +139,10 @@ t_base	*read_map_file(t_base *base)
 	{
 		if (read_valid(fd, base))
 			return (NULL);
-		base->data->map = get_map(base);
 		if (base->data->map)
 		{
 			if (valid_map(base) == 1)
-				return (NULL);
+				return (free_all(base), NULL);
 		}
 	}
 	close(fd);

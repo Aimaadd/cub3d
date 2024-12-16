@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abentaye <abentaye@student.s19.b\e>        +#+  +:+       +#+        */
+/*   By: abentaye <abentaye@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 22:03:31 by abentaye          #+#    #+#             */
-/*   Updated: 2024/12/14 17:05:44 by abentaye         ###   ########.fr       */
+/*   Updated: 2024/12/16 12:04:39 by abentaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	print_map(char **map)
 	printf ("\nPRINTING MAP\n");
 	while (map[i])
 	{
-		printf("%s", map[i]);
+		printf("%s\n", map[i]);
 		i++;
 	}
 	printf("\n");
@@ -84,6 +84,7 @@ int	main(int argc, char **argv)
 	if (read_map_file(base) == NULL)
 		return (free_all(base), 1);
 	display_text(base->text);
+	print_map(base->data->map);
 	if (!base->data->map)
 		return (free_all(base), 1);
 	return (0);

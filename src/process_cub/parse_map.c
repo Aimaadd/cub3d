@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abentaye <abentaye@student.s19.b\e>        +#+  +:+       +#+        */
+/*   By: abentaye <abentaye@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 14:07:15 by abentaye          #+#    #+#             */
-/*   Updated: 2024/12/14 15:24:36 by abentaye         ###   ########.fr       */
+/*   Updated: 2024/12/16 11:37:46 by abentaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	print_mapp(char **map)
 static int	map_check(t_base *base)
 {
 	if (floodfill(base) == 0)
-		print_mapp(base->data->map);
+		printf("map is closed\n");
 	else
 		return (printf("\nmap isn't closed\n"), exit(1), 1);
 	return (0);

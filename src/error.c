@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abentaye <abentaye@student.s19.b\e>        +#+  +:+       +#+        */
+/*   By: abentaye <abentaye@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 19:18:28 by abentaye          #+#    #+#             */
-/*   Updated: 2024/12/14 17:03:48 by abentaye         ###   ########.fr       */
+/*   Updated: 2024/12/16 11:39:34 by abentaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,6 @@ void	free_all(t_base *base)
 {
 	if (base->map)
 	{
-		if (base->map->map)
-			ft_free_split(base->map->map);
 		if (base->map->fparams)
 			free(base->map->fparams);
 		free(base->map);
