@@ -16,6 +16,16 @@ SRC := src/main.c \
 		src/error.c \
 		src/process_cub/dfs_algorithm.c \
 		src/helper.c \
+		src/raycasting/raycast/raycasting_calc.c \
+		src/raycasting/raycast/raycasting.c \
+		src/raycasting/raycast/raycasting_dda.c \
+		src/raycasting/raycast/raycasting_render.c \
+		src/raycasting/moves/moves_forward.c \
+		src/raycasting/moves/moves_strafe.c \
+		src/raycasting/events.c \
+		src/raycasting/rotation.c \
+		src/raycasting/game_loop.c \
+		src/music.c
 
 Y = "\033[33m"
 R = "\033[31m"

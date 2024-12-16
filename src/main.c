@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abentaye <abentaye@student.s19.be>         +#+  +:+       +#+        */
+/*   By: pepi <pepi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 22:03:31 by abentaye          #+#    #+#             */
-/*   Updated: 2024/12/16 12:04:39 by abentaye         ###   ########.fr       */
+/*   Updated: 2024/12/16 14:42:04 by pepi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,18 @@ void	print_map(char **map)
 int	main(int argc, char **argv)
 {
 	t_base	*base;
+	//pid_t	pid;
 
+	/*
+	pid = fork();
+	if (pid == 0)
+		play_music();
+	else if (pid > 0)
+	{
+		perror("Erreur lors du fork");
+		exit(1);
+	}
+	*/
 	base = malloc(sizeof(t_base));
 	if (!base)
 		return (free_all(base), 1);
@@ -87,5 +98,10 @@ int	main(int argc, char **argv)
 	print_map(base->data->map);
 	if (!base->data->map)
 		return (free_all(base), 1);
+	game_loop(base);
+	/*
+	if (pid > 0)
+        kill(pid, SIGTERM);
 	return (0);
+	*/
 }
