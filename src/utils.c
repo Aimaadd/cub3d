@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pepi <pepi@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: rpepi <rpepi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 15:00:02 by pepi              #+#    #+#             */
-/*   Updated: 2024/12/17 14:52:31 by pepi             ###   ########.fr       */
+/*   Updated: 2024/12/17 16:58:50 by rpepi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,20 +28,18 @@ int	init_textures_and_mlx(t_base *base)
 {
 	if (init_mlx(base) != 0)
 	{
-		printf("Erreur d'initialisation MLX\n");
+		free_all(base, "Bad texture");
 		return (1);
-		free_all(base);
 	}
 	if (load_textures(base) != 0)
 	{
-		printf("Erreur de chargement des textures\n");
+		free_all(base, "Bad texture");
 		return (1);
-		free_all(base);
 	}
 	if (verify_texture_dimensions(base) != 0)
 	{
+		free_all(base, "bad texture");
 		return (1);
-		free_all(base);
 	}
 	return (0);
 }

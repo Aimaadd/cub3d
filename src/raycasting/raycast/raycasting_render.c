@@ -3,53 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_render.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pepi <pepi@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: rpepi <rpepi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 15:01:13 by rpepi             #+#    #+#             */
-/*   Updated: 2024/12/17 15:07:08 by pepi             ###   ########.fr       */
+/*   Updated: 2024/12/17 16:38:54 by rpepi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/cub3d.h"
 
-unsigned int	create_rgb(char *color)
-{
-	char			**split;
-	int				r;
-	int				g;
-	int				b;
-	unsigned int	rgb;
-
-	if (!color)
-		return (0xFF000000);
-	split = ft_split(color, ',');
-	if (!split || !split[0] || !split[1] || !split[2])
-	{
-		if (split)
-			ft_free_split(split);
-		return (0xFF000000);
-	}
-	r = ft_atoi(split[0]);
-	g = ft_atoi(split[1]);
-	b = ft_atoi(split[2]);
-	r = (r > 255) ? 255 : r; // si supérieur à 255, on met 255
-	g = (g > 255) ? 255 : g;
-	b = (b > 255) ? 255 : b;
-	r = (r < 0) ? 0 : r; // si inférieur à 0, on met 0
-	g = (g < 0) ? 0 : g;
-	b = (b < 0) ? 0 : b;
-	rgb = ((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff);
-		// on met les valeurs dans rgb
-	ft_free_split(split);
-	return (rgb);
-}
-
+/*
+** Fonction principale du raycasting
+** Gère le lancement des rayons et l'affichage de la scène 3D
+*/
 void	raycasting(t_base *base)
 {
 	t_ray_calc	rc;
 	int			x;
 
-	// Dessiner le fond avant le raycasting
 	draw_background(base);
 	x = 0;
 	while (x < WIDTH)
@@ -65,45 +36,57 @@ void	raycasting(t_base *base)
 		0);
 }
 
-void	render_wall(t_base *base, t_ray_calc *rc, int x)
+/*
+** Calcule les paramètres nécessaires pour le rendu d'un mur
+** Détermine les coordonnées de texture et les points de début/fin
+*/
+void	calc_wall_params(t_base *base, t_ray_calc *rc, int *line_height,
+		t_draw_info *draw)
 {
-	int		line_height;
-	int		draw_start;
-	int		draw_end;
 	double	wall_x;
-	double	tex_pos;
 
-	// Calculer la hauteur de la ligne à dessiner
-	line_height = (int)(HEIGHT / rc->perp_wall_dist);
-	// Calculer les points de début et de fin de la ligne verticale
-	draw_start = -line_height / 2 + HEIGHT / 2;
-	if (draw_start < 0)
-		draw_start = 0;
-	draw_end = line_height / 2 + HEIGHT / 2;
-	if (draw_end >= HEIGHT)
-		draw_end = HEIGHT - 1;
-	// Calculer la position x exacte de la texture
+	*line_height = (int)(HEIGHT / rc->perp_wall_dist);
+	draw->start = -(*line_height) / 2 + HEIGHT / 2;
+	if (draw->start < 0)
+		draw->start = 0;
+	draw->end = (*line_height) / 2 + HEIGHT / 2;
+	if (draw->end >= HEIGHT)
+		draw->end = HEIGHT - 1;
 	if (rc->side == 0)
 		wall_x = base->player->pos_y + rc->perp_wall_dist * rc->ray_dir_y;
 	else
 		wall_x = base->player->pos_x + rc->perp_wall_dist * rc->ray_dir_x;
 	wall_x -= floor(wall_x);
-	// Coordonnée x de la texture
-	int tex_x = (int)(wall_x * 64.0); // 64 est la largeur fixe de la texture
+	draw->tex_x = (int)(wall_x * 64.0);
 	if (rc->side == 0 && rc->ray_dir_x > 0)
-		tex_x = 64 - tex_x - 1;
+		draw->tex_x = 64 - draw->tex_x - 1;
 	if (rc->side == 1 && rc->ray_dir_y < 0)
-		tex_x = 64 - tex_x - 1;
-	// Pour chaque pixel vertical de la ligne
-	double step = 64.0 / line_height; // 64 est la hauteur fixe de la texture
-	tex_pos = (draw_start - HEIGHT / 2 + line_height / 2) * step;
-	for (int y = draw_start; y < draw_end; y++)
+		draw->tex_x = 64 - draw->tex_x - 1;
+}
+
+/*
+** Dessine une colonne de mur texturé à l'écran
+** Gère l'application des textures et la perspective
+*/
+void	render_wall(t_base *base, t_ray_calc *rc, int x)
+{
+	int			line_height;
+	t_draw_info	draw;
+	double		step;
+	double		tex_pos;
+	int			tex_y;
+
+	calc_wall_params(base, rc, &line_height, &draw);
+	step = 64.0 / line_height;
+	tex_pos = (draw.start - HEIGHT / 2 + line_height / 2) * step;
+	while (draw.start < draw.end)
 	{
-		int tex_y = (int)tex_pos & 63;
-			// 63 = 64-1 (masque pour rester dans les limites)
+		tex_y = (int)tex_pos & 63;
 		tex_pos += step;
-		if (x >= 0 && x < WIDTH && y >= 0 && y < HEIGHT)
-			my_mlx_pixel_put(base->data, x, y,
-				get_texture_color(&base->textures[rc->tex_num], tex_x, tex_y));
+		if (x >= 0 && x < WIDTH && draw.start >= 0 && draw.start < HEIGHT)
+			my_mlx_pixel_put(base->data, x, draw.start,
+				get_texture_color(&base->textures[rc->tex_num], draw.tex_x,
+					tex_y));
+		draw.start++;
 	}
 }

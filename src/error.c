@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pepi <pepi@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: rpepi <rpepi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 19:18:28 by abentaye          #+#    #+#             */
-/*   Updated: 2024/12/17 14:05:17 by pepi             ###   ########.fr       */
+/*   Updated: 2024/12/17 16:54:27 by rpepi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	free_text(t_textures *text)
 		free(text->c);
 }
 
-void	free_all(t_base *base)
+void	free_all(t_base *base, char *str)
 {
 	if (base->map)
 	{
@@ -47,8 +47,10 @@ void	free_all(t_base *base)
 		free_text(base->text);
 		free(base->text);
 	}
-	free_textures(base);
+	if (base->text)
+		free_textures(base);
 	write(1, "Error\n", 6);
+	printf("%s\n", str);
 	exit(1);
 }
 

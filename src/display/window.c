@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pepi <pepi@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: rpepi <rpepi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 15:35:18 by abentaye          #+#    #+#             */
-/*   Updated: 2024/12/17 14:07:37 by pepi             ###   ########.fr       */
+/*   Updated: 2024/12/17 16:59:38 by rpepi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,17 +71,19 @@ static int	init_map(t_base *base)
 	return (0);
 }
 
-void	initialization(t_base *base, char **argv)
+void	initialization(t_base *base, char **argv, int argc)
 {
+	if (argc != 2)
+		return (exit(1));
 	base->map_name = argv[1];
 	if (init_player(base) == 1)
-		free_all(base);
+		free_all(base, "Initialization failed");
 	if (init_map(base) == 1)
-		free_all(base);
+		free_all(base, "Initialization failed");
 	if (init_base_data(base) == 1)
-		free_all(base);
+		free_all(base, "Initialization failed");
 	if (!base->data)
-		free_all(base);
+		free_all(base, "Initialization failed");
 	if (init_text(base) == 1)
-		free_all(base);
+		free_all(base, "Initialization failed");
 }

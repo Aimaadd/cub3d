@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pepi <pepi@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: rpepi <rpepi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 22:03:33 by abentaye          #+#    #+#             */
-/*   Updated: 2024/12/17 14:53:56 by pepi             ###   ########.fr       */
+/*   Updated: 2024/12/17 17:00:41 by rpepi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,12 +181,18 @@ typedef struct s_wall_params
 	int	draw_end;
 }	t_wall_params;
 
+typedef struct s_draw_info
+{
+	int	start;
+	int	end;
+	int	tex_x;
+}	t_draw_info;
 
 int					init_mlx(t_base *base);
 
 //  ++++++++++++++++ window.c ++++++++++++++++
 
-void				initialization(t_base *base, char **argv);
+void	initialization(t_base *base, char **argv, int argc);
 
 // +++++++++++++++ file_reader.c ++++++++++++++
 
@@ -195,12 +201,8 @@ void				ft_free_split(char **split);
 
 // ++++++++++++++++ error.c +++++++++++++++++++
 
-void				free_all(t_base *base);
+void				free_all(t_base *base, char *str);
 void				free_text(t_textures *text);
-
-// +++++++++++++++ map_reader.c +++++++++++++++
-
-char				**get_map(t_base *base);
 
 // +++++++++++++++ struct_handler.c +++++++++++++++
 
@@ -285,4 +287,5 @@ void				my_mlx_pixel_put(t_data *data, int x, int y, int color);
 int					init_textures_and_mlx(t_base *base);
 unsigned int		get_texture_color(t_texture_data *tex, int x, int y);
 unsigned int		create_rgb(char *color);
+
 #endif

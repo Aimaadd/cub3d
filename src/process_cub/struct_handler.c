@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct_handler.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pepi <pepi@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: rpepi <rpepi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 13:50:17 by abentaye          #+#    #+#             */
-/*   Updated: 2024/12/17 14:08:55 by pepi             ###   ########.fr       */
+/*   Updated: 2024/12/17 17:04:27 by rpepi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,13 @@
 int	text_checker(t_textures *text)
 {
 	if ((open(text->no, O_RDONLY)) == -1)
-		return (printf("error texutre\n"), 1);
+		return (printf("error texture\n"), 1);
 	if ((open(text->ea, O_RDONLY)) == -1)
-		return (printf("error texutre\n"), 1);
+		return (printf("error texture\n"), 1);
 	if ((open(text->so, O_RDONLY)) == -1)
-		return (printf("error texutre\n"), 1);
+		return (printf("error texture\n"), 1);
 	if ((open(text->we, O_RDONLY)) == -1)
-		return (printf("error texutre\n"), 1);
-	printf("Textures are valid\n");
+		return (printf("error texture\n"), 1);
 	return (0);
 }
 

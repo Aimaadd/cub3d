@@ -3,15 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_calc.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pepi <pepi@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: rpepi <rpepi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 15:00:51 by rpepi             #+#    #+#             */
-/*   Updated: 2024/12/17 14:45:40 by pepi             ###   ########.fr       */
+/*   Updated: 2024/12/17 17:05:16 by rpepi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/cub3d.h"
 
+/*
+** Initialise les paramètres du rayon pour le raycasting
+** Calcule la direction du rayon et sa position initiale
+*/
 void	init_ray_dir(t_base *base, t_ray_calc *rc, int x)
 {
 	rc->camera_x = 2 * x / (double)WIDTH - 1;
@@ -24,6 +28,10 @@ void	init_ray_dir(t_base *base, t_ray_calc *rc, int x)
 	rc->hit = 0;
 }
 
+/*
+** Calcule les distances et les pas pour l'algorithme DDA
+** Détermine la direction et la longueur des pas pour le rayon
+*/
 void	calc_step_dist(t_ray_calc *rc, t_player *player)
 {
 	if (rc->ray_dir_x < 0)

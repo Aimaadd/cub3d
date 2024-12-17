@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pepi <pepi@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: rpepi <rpepi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 14:15:21 by pepi              #+#    #+#             */
-/*   Updated: 2024/12/17 14:51:15 by pepi             ###   ########.fr       */
+/*   Updated: 2024/12/17 16:28:00 by rpepi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ void	draw_texture_line_part(t_data *data, t_draw_params *params)
 	}
 }
 
-static void	draw_background_line(t_data *data, int y, unsigned int ceiling_color,
-		unsigned int floor_color)
+static void	draw_background_line(t_data *data, int y,
+		unsigned int ceiling_color, unsigned int floor_color)
 {
 	int	x;
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pepi <pepi@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: rpepi <rpepi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 22:03:31 by abentaye          #+#    #+#             */
-/*   Updated: 2024/12/17 14:06:02 by pepi             ###   ########.fr       */
+/*   Updated: 2024/12/17 17:01:29 by rpepi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,50 +25,50 @@ int	init_mlx(t_base *base)
 {
 	base->mlx = malloc(sizeof(t_mlx));
 	if (!base->mlx)
-		return (free_all(base), 1);
+		return (free_all(base, "Malloc failed"), 1);
 	base->mlx->ptr = mlx_init();
 	if (!base->mlx->ptr)
-		return (free_all(base), 1);
+		return (free_all(base, "mlx_int failed"), 1);
 	base->mlx->win = mlx_new_window(base->mlx->ptr, WIDTH, HEIGHT, "cub3D");
 	if (!base->mlx->win)
-		return (free_all(base), 1);
+		return (free_all(base, "mlx_new_window failed"), 1);
 	base->data->img = mlx_new_image(base->mlx->ptr, WIDTH, HEIGHT);
 	if (!base->data->img)
-		return (free_all(base), 1);
+		return (free_all(base, "mlx_new_image failed"), 1);
 	base->data->addr = mlx_get_data_addr(base->data->img,
 			&base->data->bits_per_pixel, &base->data->line_length,
 			&base->data->endian);
 	if (!base->data->addr)
-		return (free_all(base), 1);
+		return (free_all(base, "mlx_get_data_addr failed"), 1);
 	return (0);
 }
 
-static void	display_text(t_textures *text)
-{
-	printf("DISPLAY TEXTURES\n");
-	printf("NO : %s\n", text->no);
-	printf("SO : %s\n", text->so);
-	printf("WE :%s\n", text->we);
-	printf("EA :%s\n", text->ea);
-	printf("F : %s\n", text->f);
-	printf("C : %s\n", text->c);
-	printf("set : %d\n", text->set);
-	printf("DONE PRINTING\n");
-}
+// static void	display_text(t_textures *text)
+// {
+// 	printf("DISPLAY TEXTURES\n");
+// 	printf("NO : %s\n", text->no);
+// 	printf("SO : %s\n", text->so);
+// 	printf("WE :%s\n", text->we);
+// 	printf("EA :%s\n", text->ea);
+// 	printf("F : %s\n", text->f);
+// 	printf("C : %s\n", text->c);
+// 	printf("set : %d\n", text->set);
+// 	printf("DONE PRINTING\n");
+// }
 
-void	print_map(char **map)
-{
-	int	i;
+// void	print_map(char **map)
+// {
+// 	int	i;
 
-	i = 0;
-	printf ("\nPRINTING MAP\n");
-	while (map[i])
-	{
-		printf("%s\n", map[i]);
-		i++;
-	}
-	printf("\n");
-}
+// 	i = 0;
+// 	printf ("\nPRINTING MAP\n");
+// 	while (map[i])
+// 	{
+// 		printf("%s\n", map[i]);
+// 		i++;
+// 	}
+// 	printf("\n");
+// }
 
 int	main(int argc, char **argv)
 {
@@ -77,17 +77,15 @@ int	main(int argc, char **argv)
 
 	base = malloc(sizeof(t_base));
 	if (!base)
-		return (free_all(base), 1);
-	initialization(base, argv);
+		return (free_all(base, "Malloc failed"), 1);
+	initialization(base, argv, argc);
 	if (!base->data || !base->mlx)
-		return (free_all(base), 1);
+		return (free_all(base, "Initialization failed"), 1);
 	args_suffix_checker(argc, argv);
 	if (read_map_file(base) == NULL)
-		return (free_all(base), 1);
-	display_text(base->text);
-	print_map(base->data->map);
+		return (free_all(base, "read_map_file failed"), 1);
 	if (!base->data->map)
-		return (free_all(base), 1);
+		return (free_all(base, "no map"), 1);
 	if (init_textures_and_mlx(base) == 1)
 		return (1);
 	pid = fork();

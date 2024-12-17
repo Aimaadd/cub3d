@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abentaye <abentaye@student.s19.be>         +#+  +:+       +#+        */
+/*   By: rpepi <rpepi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 14:07:15 by abentaye          #+#    #+#             */
-/*   Updated: 2024/12/16 11:37:46 by abentaye         ###   ########.fr       */
+/*   Updated: 2024/12/17 17:05:59 by rpepi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	char_reader(char c, int i, int j, t_base *base)
 		return (0);
 	}
 	else
-		return (free_all(base), 1);
+		return (free_all(base, "wrong char in map"), 1);
 	return (1);
 }
 
@@ -55,26 +55,26 @@ static int	read_map(t_base *base)
 	return (0);
 }
 
-void	print_mapp(char **map)
-{
-	int	i;
+// void	print_mapp(char **map)
+// {
+// 	int	i;
 
-	i = 0;
-	printf("PRINTING FLOODFILLED MAP -------------\n");
-	while (map[i])
-	{
-		printf("%s", map[i]);
-		i++;
-	}
-	printf("\n--------------------------\n");
-}
+// 	i = 0;
+// 	printf("PRINTING FLOODFILLED MAP -------------\n");
+// 	while (map[i])
+// 	{
+// 		printf("%s", map[i]);
+// 		i++;
+// 	}
+// 	printf("\n--------------------------\n");
+// }
 
 static int	map_check(t_base *base)
 {
 	if (floodfill(base) == 0)
-		printf("map is closed\n");
+		;
 	else
-		return (printf("\nmap isn't closed\n"), exit(1), 1);
+		return (printf("Error \nmap isn't closed\n"), exit(1), 1);
 	return (0);
 }
 

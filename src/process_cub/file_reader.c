@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file_reader.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abentaye <abentaye@student.s19.be>         +#+  +:+       +#+        */
+/*   By: rpepi <rpepi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 18:39:54 by abentaye          #+#    #+#             */
-/*   Updated: 2024/12/16 16:11:04 by abentaye         ###   ########.fr       */
+/*   Updated: 2024/12/17 17:02:57 by rpepi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,18 +55,11 @@ char	**new_get_map(t_base *base, char **split, int i)
 		map[j] = malloc(sizeof(char *) * ft_strlen(split[i]) + 1);
 		map[j] = split[i];
 		if (!map[j])
-			return (free_all(base), NULL);
+			return (free_all(base, "malloc failed"), NULL);
 		i++;
 		j++;
 	}
 	map[j] = NULL;
-	printf("MAP\n");
-	j = 0;
-	while (map[j])
-	{
-		printf("%s\n", map[j]);
-		j++;
-	}
 	return (map);
 }
 
@@ -100,19 +93,19 @@ static int	read_valid(int fd, t_base *base)
 
 	buffer = (char *)malloc(BUFFER_SIZE);
 	if (!buffer)
-		return (free_all(base), 1);
+		return (free_all(base, "malloc failed"), 1);
 	b_read = read(fd, buffer, BUFFER_SIZE - 1);
 	while (b_read > 0)
 	{
 		buffer[b_read] = '\0';
 		if (process_buffer(base, buffer) == -1)
-			return (free_all(base), 1);
+			return (free_all(base, "malloc failed"), 1);
 		if (buffer[0] == '\0')
 			break ;
 		b_read = read(fd, buffer, BUFFER_SIZE - 1);
 	}
 	if (b_read < 0)
-		return (free_all(base), 1);
+		return (free_all(base, "malloc failed"), 1);
 	free(buffer);
 	close(fd);
 	return (0);
@@ -135,7 +128,7 @@ t_base	*read_map_file(t_base *base)
 		if (base->data->map)
 		{
 			if (valid_map(base) == 1)
-				return (free_all(base), NULL);
+				return (free_all(base, "map is not valid"), NULL);
 		}
 	}
 	close(fd);
