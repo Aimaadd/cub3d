@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file_reader.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpepi <rpepi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: abentaye <abentaye@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 18:39:54 by abentaye          #+#    #+#             */
-/*   Updated: 2024/12/17 17:02:57 by rpepi            ###   ########.fr       */
+/*   Updated: 2024/12/17 23:13:26 by abentaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,21 +41,47 @@ int	size_map(char **split, int i)
 	return (j - i + 1);
 }
 
+static int	longest_line(char **map)
+{
+	int save;
+	int	i = 0;
+	int	compare;
+
+	compare = 0;
+	save = 0;
+	while (map[i])
+	{
+		save = ft_strlen(map[i]);
+		if (save >= compare)
+			compare = save;
+		i++;
+	}
+	return (compare);
+}
+
 char	**new_get_map(t_base *base, char **split, int i)
 {
 	char	**map;
 	int		j;
+	int		line_len;
+	int		split_len;
 
 	j = 0;
 	map = malloc(sizeof(char *) * size_map(split, i));
+	if (!map)
+			return (free_all(base, "malloc failed"), NULL);
+	line_len = longest_line(split);
 	while (split[i])
 	{
 		if (split[i][0] == '\n')
 			i++;
-		map[j] = malloc(sizeof(char *) * ft_strlen(split[i]) + 1);
-		map[j] = split[i];
+		map[j] = malloc(sizeof(char *) * line_len);
 		if (!map[j])
 			return (free_all(base, "malloc failed"), NULL);
+		split_len = ft_strlen(split[i]);
+		ft_memcpy(map[j], split[i], split_len);
+		ft_memset(map[j] + split_len, 0, line_len - split_len);
+		map[j][line_len] = 0; 
 		i++;
 		j++;
 	}
@@ -77,10 +103,10 @@ static int	process_buffer(t_base *base, char *buffer)
 			break ;
 		i++;
 	}
-	if (text_checker(base->text) == 1)
+	if (text_checker(base->text) == -1)
 	{
 		ft_free_split(split);
-		return (printf("wrong text\n"), exit(1), -1);
+		return (free_all(base, "text are not available"), -1);
 	}
 	base->data->map = new_get_map(base, split, i + 1);
 	return (i);

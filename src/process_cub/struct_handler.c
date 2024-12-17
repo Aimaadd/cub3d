@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct_handler.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpepi <rpepi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: abentaye <abentaye@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 13:50:17 by abentaye          #+#    #+#             */
-/*   Updated: 2024/12/17 17:04:27 by rpepi            ###   ########.fr       */
+/*   Updated: 2024/12/17 23:13:10 by abentaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,7 @@ t_textures	*fill_textures(t_textures *text, char *param)
 	else if (ft_strncmp(param, "C ", 2) == 0 && text->c != param)
 		text->c = param_format(param);
 	else
-	{
-		free_text(text);
-		return (NULL);
-	}
+		return (text->set = -1, NULL);
 	if (text->no && text->ea && text->so && text->we && text->f && text->c)
 	{
 		text->set = 1;
