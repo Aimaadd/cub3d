@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpepi <rpepi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pepi <pepi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 15:05:49 by rpepi             #+#    #+#             */
-/*   Updated: 2024/12/05 16:05:26 by rpepi            ###   ########.fr       */
+/*   Updated: 2024/12/17 14:43:58 by pepi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,33 +54,4 @@ void	init_player_direction(t_player *player)
 	init_player_dir_ew(player);
 	player->move_speed = 0.05;
 	player->rot_speed = 0.05;
-}
-
-void	draw_vertical_line(t_data *data, int x, int start, int end, int color)
-{
-	int		y;
-	char	*dst;
-
-	y = 0;
-	while (y < start)
-	{
-		dst = data->addr + (y * data->line_length + x * \
-			(data->bits_per_pixel / 8));
-		*(unsigned int *)dst = 0x87CEEB;
-		y++;
-	}
-	while (y < end)
-	{
-		dst = data->addr + (y * data->line_length + x * \
-			(data->bits_per_pixel / 8));
-		*(unsigned int *)dst = color;
-		y++;
-	}
-	while (y < HEIGHT)
-	{
-		dst = data->addr + (y * data->line_length + x * \
-			(data->bits_per_pixel / 8));
-		*(unsigned int *)dst = 0x808080;
-		y++;
-	}
 }

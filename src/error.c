@@ -6,7 +6,7 @@
 /*   By: pepi <pepi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 19:18:28 by abentaye          #+#    #+#             */
-/*   Updated: 2024/12/16 15:01:23 by pepi             ###   ########.fr       */
+/*   Updated: 2024/12/17 14:05:17 by pepi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,18 @@
 
 void	free_text(t_textures *text)
 {
-	if (text->NO)
-		free(text->NO);
-	if (text->SO)
-		free(text->SO);
-	if (text->WE)
-		free(text->WE);
-	if (text->EA)
-		free(text->EA);
-	if (text->F)
-		free(text->F);
-	if (text->C)
-		free(text->C);
+	if (text->no)
+		free(text->so);
+	if (text->so)
+		free(text->so);
+	if (text->we)
+		free(text->we);
+	if (text->ea)
+		free(text->ea);
+	if (text->f)
+		free(text->f);
+	if (text->c)
+		free(text->c);
 }
 
 void	free_all(t_base *base)
@@ -52,9 +52,9 @@ void	free_all(t_base *base)
 	exit(1);
 }
 
-void free_textures(t_base *base)
+void	free_textures(t_base *base)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < 4)

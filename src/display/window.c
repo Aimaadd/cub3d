@@ -6,7 +6,7 @@
 /*   By: pepi <pepi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 15:35:18 by abentaye          #+#    #+#             */
-/*   Updated: 2024/12/16 15:11:26 by pepi             ###   ########.fr       */
+/*   Updated: 2024/12/17 14:07:37 by pepi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,12 @@ static int	init_text(t_base *base)
 	base->text = malloc(sizeof(t_textures));
 	if (!base->text)
 		return (1);
-	base->text->C = NULL;
-	base->text->EA = NULL;
-	base->text->F = NULL;
-	base->text->NO = NULL;
-	base->text->SO = NULL;
-	base->text->WE = NULL;
+	base->text->c = NULL;
+	base->text->ea = NULL;
+	base->text->f = NULL;
+	base->text->no = NULL;
+	base->text->so = NULL;
+	base->text->we = NULL;
 	base->text->set = 0;
 	return (0);
 }

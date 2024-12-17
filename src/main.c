@@ -6,7 +6,7 @@
 /*   By: pepi <pepi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 22:03:31 by abentaye          #+#    #+#             */
-/*   Updated: 2024/12/16 15:33:55 by pepi             ###   ########.fr       */
+/*   Updated: 2024/12/17 14:06:02 by pepi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,12 @@ int	init_mlx(t_base *base)
 static void	display_text(t_textures *text)
 {
 	printf("DISPLAY TEXTURES\n");
-	printf("NO : %s\n", text->NO);
-	printf("SO : %s\n", text->SO);
-	printf("WE :%s\n", text->WE);
-	printf("EA :%s\n", text->EA);
-	printf("F : %s\n", text->F);
-	printf("C : %s\n", text->C);
+	printf("NO : %s\n", text->no);
+	printf("SO : %s\n", text->so);
+	printf("WE :%s\n", text->we);
+	printf("EA :%s\n", text->ea);
+	printf("F : %s\n", text->f);
+	printf("C : %s\n", text->c);
 	printf("set : %d\n", text->set);
 	printf("DONE PRINTING\n");
 }
@@ -75,7 +75,6 @@ int	main(int argc, char **argv)
 	t_base	*base;
 	pid_t	pid;
 
-	
 	base = malloc(sizeof(t_base));
 	if (!base)
 		return (free_all(base), 1);
@@ -96,6 +95,6 @@ int	main(int argc, char **argv)
 		play_music();
 	game_loop(base);
 	if (pid > 0)
-        kill(pid, SIGTERM);
+		kill(pid, SIGTERM);
 	return (0);
 }

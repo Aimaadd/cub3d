@@ -6,7 +6,7 @@
 /*   By: pepi <pepi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 13:50:17 by abentaye          #+#    #+#             */
-/*   Updated: 2024/12/16 18:15:08 by pepi             ###   ########.fr       */
+/*   Updated: 2024/12/17 14:08:55 by pepi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 int	text_checker(t_textures *text)
 {
-	if ((open(text->NO, O_RDONLY)) == -1)
+	if ((open(text->no, O_RDONLY)) == -1)
 		return (printf("error texutre\n"), 1);
-	if ((open(text->EA, O_RDONLY)) == -1)
+	if ((open(text->ea, O_RDONLY)) == -1)
 		return (printf("error texutre\n"), 1);
-	if ((open(text->SO, O_RDONLY)) == -1)
+	if ((open(text->so, O_RDONLY)) == -1)
 		return (printf("error texutre\n"), 1);
-	if ((open(text->WE, O_RDONLY)) == -1)
+	if ((open(text->we, O_RDONLY)) == -1)
 		return (printf("error texutre\n"), 1);
 	printf("Textures are valid\n");
 	return (0);
@@ -63,24 +63,24 @@ t_textures	*fill_textures(t_textures *text, char *param)
 {
 	if (!param && text->set != 1)
 		return (NULL);
-	else if (ft_strncmp(param, "NO ", 3) == 0 && text->NO != param)
-		text->NO = param_format(param);
-	else if (ft_strncmp(param, "EA ", 3) == 0 && text->EA != param)
-		text->EA = param_format(param);
-	else if (ft_strncmp(param, "SO ", 3) == 0 && text->SO != param)
-		text->SO = param_format(param);
-	else if (ft_strncmp(param, "WE ", 3) == 0 && text->WE != param)
-		text->WE = param_format(param);
-	else if (ft_strncmp(param, "F ", 2) == 0 && text->F != param)
-		text->F = param_format(param);
-	else if (ft_strncmp(param, "C ", 2) == 0 && text->C != param)
-		text->C = param_format(param);
+	else if (ft_strncmp(param, "NO ", 3) == 0 && text->no != param)
+		text->no = param_format(param);
+	else if (ft_strncmp(param, "EA ", 3) == 0 && text->ea != param)
+		text->ea = param_format(param);
+	else if (ft_strncmp(param, "SO ", 3) == 0 && text->so != param)
+		text->so = param_format(param);
+	else if (ft_strncmp(param, "WE ", 3) == 0 && text->we != param)
+		text->we = param_format(param);
+	else if (ft_strncmp(param, "F ", 2) == 0 && text->f != param)
+		text->f = param_format(param);
+	else if (ft_strncmp(param, "C ", 2) == 0 && text->c != param)
+		text->c = param_format(param);
 	else
 	{
 		free_text(text);
 		return (NULL);
 	}
-	if (text->NO && text->EA && text->SO && text->WE && text->F && text->C)
+	if (text->no && text->ea && text->so && text->we && text->f && text->c)
 	{
 		text->set = 1;
 		return (text);

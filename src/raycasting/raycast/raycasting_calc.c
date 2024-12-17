@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_calc.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpepi <rpepi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pepi <pepi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 15:00:51 by rpepi             #+#    #+#             */
-/*   Updated: 2024/12/02 15:12:22 by rpepi            ###   ########.fr       */
+/*   Updated: 2024/12/17 14:45:40 by pepi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,4 @@ void	calc_step_dist(t_ray_calc *rc, t_player *player)
 		rc->step_y = 1;
 		rc->side_dist_y = (rc->map_y + 1.0 - player->pos_y) * rc->delta_dist_y;
 	}
-} 
+}

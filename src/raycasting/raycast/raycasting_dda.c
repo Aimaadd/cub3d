@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_dda.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpepi <rpepi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pepi <pepi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 15:01:00 by rpepi             #+#    #+#             */
-/*   Updated: 2024/12/05 15:58:56 by rpepi            ###   ########.fr       */
+/*   Updated: 2024/12/17 15:01:57 by pepi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,13 @@ void	perform_dda(t_ray_calc *rc, t_base *base)
 			rc->side = 1;
 		}
 		if (base->data->map[rc->map_x][rc->map_y] == '1')
+		{
 			rc->hit = 1;
+			if (rc->side == 0)
+				rc->tex_num = (rc->step_x > 0) ? 0 : 1;
+			else
+				rc->tex_num = (rc->step_y > 0) ? 2 : 3;
+		}
 	}
 }
 
@@ -48,4 +54,4 @@ void	calc_wall_height(t_ray_calc *rc)
 	rc->draw_end = rc->line_height / 2 + HEIGHT / 2;
 	if (rc->draw_end >= HEIGHT)
 		rc->draw_end = HEIGHT - 1;
-} 
+}

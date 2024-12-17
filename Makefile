@@ -27,6 +27,7 @@ SRC := src/main.c \
 		src/raycasting/game_loop.c \
 		src/music.c \
 		src/texture.c \
+		src/texture_utils.c \
 		src/utils.c
 
 Y = "\033[33m"

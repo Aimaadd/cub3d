@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_loop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpepi <rpepi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pepi <pepi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 15:03:39 by rpepi             #+#    #+#             */
-/*   Updated: 2024/12/02 15:03:43 by rpepi            ###   ########.fr       */
+/*   Updated: 2024/12/17 14:37:30 by pepi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,4 +21,4 @@ void	game_loop(t_base *base)
 	mlx_hook(base->mlx->win, 17, 1L << 17, handle_close, base);
 	mlx_hook(base->mlx->win, 25, 1L << 25, handle_resize, base);
 	mlx_loop(base->mlx->ptr);
-} 
+}
