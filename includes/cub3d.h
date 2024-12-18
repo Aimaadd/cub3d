@@ -6,7 +6,7 @@
 /*   By: abentaye <abentaye@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 22:03:33 by abentaye          #+#    #+#             */
-/*   Updated: 2024/12/18 13:15:25 by abentaye         ###   ########.fr       */
+/*   Updated: 2024/12/18 13:37:22 by abentaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,7 +192,7 @@ int					init_mlx(t_base *base);
 
 //  ++++++++++++++++ window.c ++++++++++++++++
 
-void	initialization(t_base *base, char **argv, int argc);
+void				initialization(t_base *base, char **argv, int argc);
 
 // +++++++++++++++ file_reader.c ++++++++++++++
 

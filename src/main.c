@@ -6,7 +6,7 @@
 /*   By: abentaye <abentaye@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 22:03:31 by abentaye          #+#    #+#             */
-/*   Updated: 2024/12/18 13:12:41 by abentaye         ###   ########.fr       */
+/*   Updated: 2024/12/18 13:22:21 by abentaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int	main(int argc, char **argv)
 	if (!base)
 		return (free_all(base, "Malloc failed"), 1);
 	initialization(base, argv, argc);
-	if (!base->data || !base->mlx)
+	if (!base->data)
 		return (free_all(base, "Initialization failed"), 1);
 	if (read_map_file(base) == NULL)
 		return (free_all(base, "read_map_file failed"), 1);

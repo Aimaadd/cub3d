@@ -6,7 +6,7 @@
 /*   By: abentaye <abentaye@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 18:39:54 by abentaye          #+#    #+#             */
-/*   Updated: 2024/12/18 13:15:03 by abentaye         ###   ########.fr       */
+/*   Updated: 2024/12/18 13:36:13 by abentaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ static int	process_buffer(t_base *base, char *buffer)
 		return (free_all(base, "text are not available"), -1);
 	}
 	base->data->map = new_get_map(base, split, i + 1);
+	ft_free_split(split);
 	return (i);
 }
 
