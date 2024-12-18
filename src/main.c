@@ -6,7 +6,7 @@
 /*   By: abentaye <abentaye@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 22:03:31 by abentaye          #+#    #+#             */
-/*   Updated: 2024/12/18 13:22:21 by abentaye         ###   ########.fr       */
+/*   Updated: 2024/12/18 16:21:34 by abentaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int	args_suffix_checker(int argc, char **argv)
 		return (write(1, "Error\nNot enough arguments\n", 28), 1);
 	if (ft_strncmp(argv[1] + ft_strlen(argv[1]) - 4, ".cub", 4) != 0)
 		return (write(1, "Error\n", 6), exit(1), 1);
+	if (open(argv[1], O_RDONLY) == -1)
+		return (write(1, "Error\nFile not found\n", 22), exit(1), 1);
 	return (0);
 }
 
