@@ -6,30 +6,11 @@
 /*   By: abentaye <abentaye@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 18:39:54 by abentaye          #+#    #+#             */
-/*   Updated: 2024/12/17 23:13:26 by abentaye         ###   ########.fr       */
+/*   Updated: 2024/12/18 13:15:03 by abentaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-
-// static int	is_valid_param(char *param)
-// {
-// 	if (ft_strncmp(param, "NO ", 3) == 0 || ft_strncmp(param, "F ", 2) == 0
-// 		|| ft_strncmp(param, "EA ", 3) == 0 || ft_strncmp(param, "C ", 2) == 0
-// 		|| ft_strncmp(param, "SO ", 3) == 0 || ft_strncmp(param, "WE ", 3) == 0
-// 		|| ft_strncmp(param, "\n", 1) == 0)
-// 		return (0);
-// 	return (1);
-// }
-
-// static int	settings_scan(char *buffer)
-// {
-// 	if (is_valid_param(buffer) != 0)
-// 	{
-// 		return (1);
-// 	}
-// 	return (0);
-// }
 
 int	size_map(char **split, int i)
 {
@@ -39,24 +20,6 @@ int	size_map(char **split, int i)
 	while (split[j])
 		j++;
 	return (j - i + 1);
-}
-
-static int	longest_line(char **map)
-{
-	int save;
-	int	i = 0;
-	int	compare;
-
-	compare = 0;
-	save = 0;
-	while (map[i])
-	{
-		save = ft_strlen(map[i]);
-		if (save >= compare)
-			compare = save;
-		i++;
-	}
-	return (compare);
 }
 
 char	**new_get_map(t_base *base, char **split, int i)
@@ -69,19 +32,17 @@ char	**new_get_map(t_base *base, char **split, int i)
 	j = 0;
 	map = malloc(sizeof(char *) * size_map(split, i));
 	if (!map)
-			return (free_all(base, "malloc failed"), NULL);
+		return (free_all(base, "malloc failed"), NULL);
 	line_len = longest_line(split);
 	while (split[i])
 	{
-		if (split[i][0] == '\n')
-			i++;
 		map[j] = malloc(sizeof(char *) * line_len);
 		if (!map[j])
 			return (free_all(base, "malloc failed"), NULL);
 		split_len = ft_strlen(split[i]);
 		ft_memcpy(map[j], split[i], split_len);
 		ft_memset(map[j] + split_len, 0, line_len - split_len);
-		map[j][line_len] = 0; 
+		map[j][line_len] = 0;
 		i++;
 		j++;
 	}

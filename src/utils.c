@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpepi <rpepi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: abentaye <abentaye@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 15:00:02 by pepi              #+#    #+#             */
-/*   Updated: 2024/12/17 16:58:50 by rpepi            ###   ########.fr       */
+/*   Updated: 2024/12/18 13:15:33 by abentaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,23 @@ int	normalize_color_value(int value)
 	if (value < 0)
 		value = 0;
 	return (value);
+}
+
+int	longest_line(char **map)
+{
+	int	save;
+	int	i;
+	int	compare;
+
+	i = 0;
+	compare = 0;
+	save = 0;
+	while (map[i])
+	{
+		save = ft_strlen(map[i]);
+		if (save >= compare)
+			compare = save;
+		i++;
+	}
+	return (compare);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpepi <rpepi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: abentaye <abentaye@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 22:03:33 by abentaye          #+#    #+#             */
-/*   Updated: 2024/12/17 17:00:41 by rpepi            ###   ########.fr       */
+/*   Updated: 2024/12/18 13:15:25 by abentaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -287,5 +287,6 @@ void				my_mlx_pixel_put(t_data *data, int x, int y, int color);
 int					init_textures_and_mlx(t_base *base);
 unsigned int		get_texture_color(t_texture_data *tex, int x, int y);
 unsigned int		create_rgb(char *color);
+int					longest_line(char **map);
 
 #endif
