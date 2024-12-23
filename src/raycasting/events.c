@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abentaye <abentaye@student.s19.be>         +#+  +:+       +#+        */
+/*   By: rpepi <rpepi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 14:48:12 by rpepi             #+#    #+#             */
-/*   Updated: 2024/12/23 13:31:43 by abentaye         ###   ########.fr       */
+/*   Updated: 2024/12/23 13:40:19 by rpepi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	handle_mouse_move(int x, int y, t_base *base)
 
 	(void)y;
 	delta_x = x - last_x;
-	rot_speed = delta_x * 0.002;
+	rot_speed = delta_x * -0.002;
 	old_dir_x = base->player->dir_x;
 	base->player->dir_x = base->player->dir_x * cos(rot_speed)
 		- base->player->dir_y * sin(rot_speed);
