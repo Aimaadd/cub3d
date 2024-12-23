@@ -6,7 +6,7 @@
 /*   By: abentaye <abentaye@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 18:39:54 by abentaye          #+#    #+#             */
-/*   Updated: 2024/12/23 12:16:25 by abentaye         ###   ########.fr       */
+/*   Updated: 2024/12/23 13:33:52 by abentaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,43 +28,25 @@ char	**new_get_map(t_base *base, char **split, int i)
 	int		j;
 	int		line_len;
 	int		split_len;
-	int		max_height;
 
 	j = 0;
-	max_height = longest_line(split);
-	map = malloc(sizeof(char *) * (max_height + 1));
+	map = malloc(sizeof(char *) * size_map(split, i));
 	if (!map)
 		return (free_all(base, "malloc failed"), NULL);
-	line_len = size_map(split, i);
-	while (j < max_height)
-	{
-		map[j] = malloc(sizeof(char) * (line_len + 1));
-		if (!map[j])
-			return (free_all(base, "malloc failed"), NULL);
-		
-		ft_memset(map[j], '1', line_len);
-		map[j][line_len] = '\0';
-		j++;
-	}
-	map[j] = NULL;
-	j = 0;
+	line_len = longest_line(split);
 	while (split[i])
 	{
+		map[j] = malloc(sizeof(char *) * line_len);
+		if (!map[j])
+			return (free_all(base, "malloc failed"), NULL);
 		split_len = ft_strlen(split[i]);
-		for (int k = 0; k < split_len; k++)
-		{
-			if (split[i][k] != ' ' && split[i][k] != '\n')
-				map[k][j] = split[i][k];
-		}
+		ft_memcpy(map[j], split[i], split_len);
+		ft_memset(map[j] + split_len, 0, line_len - split_len);
+		map[j][line_len] = 0;
 		i++;
 		j++;
 	}
-	if (base->player)
-	{
-		int temp = base->player->pos_x;
-		base->player->pos_x = base->player->pos_y;
-		base->player->pos_y = temp;
-	}
+	map[j] = NULL;
 	return (map);
 }
 

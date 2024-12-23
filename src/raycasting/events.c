@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pepi <pepi@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: abentaye <abentaye@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 14:48:12 by rpepi             #+#    #+#             */
-/*   Updated: 2024/12/17 14:34:18 by pepi             ###   ########.fr       */
+/*   Updated: 2024/12/23 13:31:43 by abentaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ int	handle_keypress(int keycode, t_base *base)
 	else if (keycode == 2 || keycode == 100)
 		move_right(base);
 	else if (keycode == 124)
-		rotate_left(base);
-	else if (keycode == 123)
 		rotate_right(base);
+	else if (keycode == 123)
+		rotate_left(base);
 	else if (keycode == 53)
 		clean_exit(base);
 	mlx_clear_window(base->mlx->ptr, base->mlx->win);
