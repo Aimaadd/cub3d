@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pepi <pepi@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: abentaye <abentaye@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 14:14:48 by pepi              #+#    #+#             */
-/*   Updated: 2024/12/17 14:37:52 by pepi             ###   ########.fr       */
+/*   Updated: 2024/12/23 12:06:08 by abentaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ static int	load_single_texture(t_base *base, t_texture_data *tex, char *path)
 
 int	load_textures(t_base *base)
 {
-	if (load_single_texture(base, &base->textures[0], base->text->no)
-		|| load_single_texture(base, &base->textures[1], base->text->so)
-		|| load_single_texture(base, &base->textures[2], base->text->we)
-		|| load_single_texture(base, &base->textures[3], base->text->ea))
+	if (load_single_texture(base, &base->textures[3], base->text->no)
+		|| load_single_texture(base, &base->textures[2], base->text->so)
+		|| load_single_texture(base, &base->textures[1], base->text->we)
+		|| load_single_texture(base, &base->textures[0], base->text->ea))
 		return (1);
 	return (0);
 }

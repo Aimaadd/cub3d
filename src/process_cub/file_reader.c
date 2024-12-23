@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file_reader.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpepi <rpepi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: abentaye <abentaye@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 18:39:54 by abentaye          #+#    #+#             */
-/*   Updated: 2024/12/23 11:19:51 by rpepi            ###   ########.fr       */
+/*   Updated: 2024/12/23 12:16:25 by abentaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ char	**new_get_map(t_base *base, char **split, int i)
 	map = malloc(sizeof(char *) * (max_height + 1));
 	if (!map)
 		return (free_all(base, "malloc failed"), NULL);
-
 	line_len = size_map(split, i);
 	while (j < max_height)
 	{
@@ -48,7 +47,6 @@ char	**new_get_map(t_base *base, char **split, int i)
 		j++;
 	}
 	map[j] = NULL;
-
 	j = 0;
 	while (split[i])
 	{
@@ -61,14 +59,12 @@ char	**new_get_map(t_base *base, char **split, int i)
 		i++;
 		j++;
 	}
-
 	if (base->player)
 	{
 		int temp = base->player->pos_x;
 		base->player->pos_x = base->player->pos_y;
 		base->player->pos_y = temp;
 	}
-
 	return (map);
 }
 
