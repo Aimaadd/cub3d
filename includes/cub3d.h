@@ -6,7 +6,7 @@
 /*   By: abentaye <abentaye@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 22:03:33 by abentaye          #+#    #+#             */
-/*   Updated: 2024/12/18 13:37:22 by abentaye         ###   ########.fr       */
+/*   Updated: 2024/12/23 14:12:14 by abentaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -207,7 +207,7 @@ void				free_text(t_textures *text);
 // +++++++++++++++ struct_handler.c +++++++++++++++
 
 t_textures			*fill_textures(t_textures *text, char *param);
-int					text_checker(t_textures *text);
+int					text_checker(t_base *base);
 
 // +++++++++++++++ parse_map.c ++++++++++++++++++
 

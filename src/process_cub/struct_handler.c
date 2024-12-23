@@ -6,22 +6,22 @@
 /*   By: abentaye <abentaye@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 13:50:17 by abentaye          #+#    #+#             */
-/*   Updated: 2024/12/23 12:15:50 by abentaye         ###   ########.fr       */
+/*   Updated: 2024/12/23 14:13:31 by abentaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-int	text_checker(t_textures *text)
+int	text_checker(t_base *base)
 {
-	if ((open(text->no, O_RDONLY)) == -1)
-		return (printf("Error texture\n"), 1);
-	if ((open(text->ea, O_RDONLY)) == -1)
-		return (printf("Error texture\n"), 1);
-	if ((open(text->so, O_RDONLY)) == -1)
-		return (printf("Error texture\n"), 1);
-	if ((open(text->we, O_RDONLY)) == -1)
-		return (printf("Error texture\n"), 1);
+	if ((open(base->text->no, O_RDONLY)) == -1)
+		return (free_all(base, "Error textures"), 1);
+	if ((open(base->text->ea, O_RDONLY)) == -1)
+		return (free_all(base, "Error textures"), 1);
+	if ((open(base->text->so, O_RDONLY)) == -1)
+		return (free_all(base, "Error textures"), 1);
+	if ((open(base->text->we, O_RDONLY)) == -1)
+		return (free_all(base, "Error textures"), 1);
 	return (0);
 }
 

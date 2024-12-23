@@ -6,7 +6,7 @@
 /*   By: abentaye <abentaye@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 18:39:54 by abentaye          #+#    #+#             */
-/*   Updated: 2024/12/23 13:33:52 by abentaye         ###   ########.fr       */
+/*   Updated: 2024/12/23 14:12:04 by abentaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static int	process_buffer(t_base *base, char *buffer)
 			break ;
 		i++;
 	}
-	if (text_checker(base->text) == -1)
+	if (text_checker(base) == -1)
 	{
 		ft_free_split(split);
 		return (free_all(base, "text are not available"), -1);
