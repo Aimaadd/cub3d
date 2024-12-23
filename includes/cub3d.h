@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abentaye <abentaye@student.s19.be>         +#+  +:+       +#+        */
+/*   By: rpepi <rpepi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 22:03:33 by abentaye          #+#    #+#             */
-/*   Updated: 2024/12/18 13:37:22 by abentaye         ###   ########.fr       */
+/*   Updated: 2024/12/23 11:21:54 by rpepi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -224,7 +224,6 @@ int					floodfill(t_base *base);
 // +++++++++++++++ helper.c ++++++++++++++++++++
 
 void				ft_free_split(char **split);
-
 void				print_map(char **map);
 
 // +++++++++++++++ music.c ++++++++++++++++++++

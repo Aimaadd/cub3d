@@ -6,7 +6,7 @@
 /*   By: rpepi <rpepi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 15:05:49 by rpepi             #+#    #+#             */
-/*   Updated: 2024/12/23 10:51:01 by rpepi            ###   ########.fr       */
+/*   Updated: 2024/12/23 11:21:18 by rpepi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 static void	init_player_dir_ns(t_player *player)
 {
-	if (player->dir == 'E')
+	if (player->dir == 'N')
 	{
 		player->dir_x = 0;
 		player->dir_y = -1;
 		player->plane_x = 0.66;
 		player->plane_y = 0;
 	}
-	else if (player->dir == 'W')
+	else if (player->dir == 'S')
 	{
 		player->dir_x = 0;
 		player->dir_y = 1;
@@ -32,14 +32,14 @@ static void	init_player_dir_ns(t_player *player)
 
 static void	init_player_dir_ew(t_player *player)
 {
-	if (player->dir == 'S')
+	if (player->dir == 'E')
 	{
 		player->dir_x = 1;
 		player->dir_y = 0;
 		player->plane_x = 0;
 		player->plane_y = 0.66;
 	}
-	else if (player->dir == 'N')
+	else if (player->dir == 'W')
 	{
 		player->dir_x = -1;
 		player->dir_y = 0;
