@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abentaye <abentaye@student.s19.be>         +#+  +:+       +#+        */
+/*   By: abentaye <abentaye@student.s19.be >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 22:03:31 by abentaye          #+#    #+#             */
-/*   Updated: 2024/12/30 14:44:20 by abentaye         ###   ########.fr       */
+/*   Updated: 2024/12/30 16:18:14 by abentaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	main(int argc, char **argv)
 		return (free_all(base, "Malloc failed"), 1);
 	initialization(base, argv, argc);
 	if (!base->data)
-		return (free_all(base, "Initialization failed"), 1);
+		return (free_all(base, "Initialization failed"), 1);	
 	if (read_map_file(base) == NULL)
 		return (free_all(base, "read_map_file failed"), 1);
 	if (!base->data->map)
@@ -92,7 +92,7 @@ int	main(int argc, char **argv)
 	if (pid == 0)
 		play_music();
 	if (pid < 0)
-		kill(pid, SIGTERM);
+		kill(pid, SIGKILL);
 	game_loop(base);
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file_reader.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abentaye <abentaye@student.s19.be>         +#+  +:+       +#+        */
+/*   By: abentaye <abentaye@student.s19.be >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 18:39:54 by abentaye          #+#    #+#             */
-/*   Updated: 2024/12/23 14:12:04 by abentaye         ###   ########.fr       */
+/*   Updated: 2024/12/30 16:11:17 by abentaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,13 +64,15 @@ static int	process_buffer(t_base *base, char *buffer)
 			break ;
 		i++;
 	}
-	if (text_checker(base) == -1)
+	if (text_checker(base) == 1)
 	{
-		ft_free_split(split);
+		if (split)
+			ft_free_split(split);
 		return (free_all(base, "text are not available"), -1);
 	}
 	base->data->map = new_get_map(base, split, i + 1);
-	ft_free_split(split);
+	if (split)
+		ft_free_split(split);
 	return (i);
 }
 
@@ -94,7 +96,8 @@ static int	read_valid(int fd, t_base *base)
 	}
 	if (b_read < 0)
 		return (free_all(base, "malloc failed"), 1);
-	free(buffer);
+	if (buffer)
+		free(buffer);
 	close(fd);
 	return (0);
 }
@@ -116,7 +119,9 @@ t_base	*read_map_file(t_base *base)
 		if (base->data->map)
 		{
 			if (valid_map(base) == 1)
+			{
 				return (free_all(base, "map is not valid"), NULL);
+			} 
 		}
 	}
 	close(fd);

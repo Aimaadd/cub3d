@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abentaye <abentaye@student.s19.be>         +#+  +:+       +#+        */
+/*   By: abentaye <abentaye@student.s19.be >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 14:48:12 by rpepi             #+#    #+#             */
-/*   Updated: 2024/12/30 14:39:51 by abentaye         ###   ########.fr       */
+/*   Updated: 2024/12/30 16:18:09 by abentaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,23 @@
 
 void	clean_exit(t_base *base)
 {
-	kill(0, SIGTERM);
+	kill(0, SIGKILL);
 	if (base->mlx->win)
 		mlx_destroy_window(base->mlx->ptr, base->mlx->win);
 	if (base->data->img)
 		mlx_destroy_image(base->mlx->ptr, base->data->img);
-	free(base->mlx);
-	free(base->data);
-	free(base->player);
-	free(base->map);
-	free(base->text);
-	free(base);
+	if (base->mlx)
+		free(base->mlx);
+	if (base->data)	
+		free(base->data);
+	if (base->player)
+		free(base->player);
+	if (base->map)
+		free(base->map);
+	if (base->text)
+		free(base->text);
+	if (base)
+		free(base);
 	exit(0);
 }
 
@@ -43,7 +49,7 @@ int	handle_keypress(int keycode, t_base *base)
 	else if (keycode == 123)
 		rotate_left(base);
 	else if (keycode == 53)
-		free_all(base, "Input");
+		clean_exit(base);
 	mlx_clear_window(base->mlx->ptr, base->mlx->win);
 	raycasting(base);
 	return (0);

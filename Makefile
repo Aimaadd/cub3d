@@ -1,5 +1,5 @@
 CC := cc
-CFLAGS := -Wall -Wextra -Werror -g #-fsanitize=address
+CFLAGS := -Wall -Wextra -Werror #-g #-fsanitize=address
 MLXPATH = ./minilibx
 LIBFT = ./libft
 LIBFTA = ./libft/libft.a

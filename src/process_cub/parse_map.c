@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpepi <rpepi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: abentaye <abentaye@student.s19.be >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 14:07:15 by abentaye          #+#    #+#             */
-/*   Updated: 2024/12/17 17:05:59 by rpepi            ###   ########.fr       */
+/*   Updated: 2024/12/30 15:44:45 by abentaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,9 @@ static int	read_map(t_base *base)
 		}
 		i++;
 	}
-	if (base->map->character > 1)
-		return (1);
-	if (base->map->character == 0)
-		return (1);
-	return (0);
+	if (base->map->character == 1)
+		return (0);
+	return (1);
 }
 
 // void	print_mapp(char **map)

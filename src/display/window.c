@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abentaye <abentaye@student.s19.be>         +#+  +:+       +#+        */
+/*   By: abentaye <abentaye@student.s19.be >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 15:35:18 by abentaye          #+#    #+#             */
-/*   Updated: 2024/12/18 13:21:47 by abentaye         ###   ########.fr       */
+/*   Updated: 2024/12/30 16:11:04 by abentaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void	initialization(t_base *base, char **argv, int argc)
 	if (argc != 2)
 		return (exit(1));
 	base->map_name = argv[1];
+	base->mlx = NULL;
 	if (init_player(base) == 1)
 		free_all(base, "Initialization failed");
 	if (init_map(base) == 1)
