@@ -6,7 +6,7 @@
 /*   By: abentaye <abentaye@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 19:18:28 by abentaye          #+#    #+#             */
-/*   Updated: 2024/12/23 15:47:40 by abentaye         ###   ########.fr       */
+/*   Updated: 2024/12/30 14:47:42 by abentaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,7 @@ void	free_all(t_base *base, char *str)
 		free_text(base->text);
 		free(base->text);
 	}
-	// if (base->text)
-	// 	free_textures(base);
+	kill(0, SIGTERM);
 	write(1, "Error\n", 6);
 	printf("%s\n", str);
 	exit(1);

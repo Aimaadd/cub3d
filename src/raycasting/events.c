@@ -6,7 +6,7 @@
 /*   By: abentaye <abentaye@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 14:48:12 by rpepi             #+#    #+#             */
-/*   Updated: 2024/12/23 13:31:43 by abentaye         ###   ########.fr       */
+/*   Updated: 2024/12/30 14:39:51 by abentaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	handle_keypress(int keycode, t_base *base)
 	else if (keycode == 123)
 		rotate_left(base);
 	else if (keycode == 53)
-		clean_exit(base);
+		free_all(base, "Input");
 	mlx_clear_window(base->mlx->ptr, base->mlx->win);
 	raycasting(base);
 	return (0);
@@ -51,7 +51,7 @@ int	handle_keypress(int keycode, t_base *base)
 
 int	handle_close(t_base *base)
 {
-	clean_exit(base);
+	free_all(base, "Program closed");
 	return (0);
 }
 

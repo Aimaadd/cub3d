@@ -6,7 +6,7 @@
 /*   By: abentaye <abentaye@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 22:03:31 by abentaye          #+#    #+#             */
-/*   Updated: 2024/12/18 13:22:21 by abentaye         ###   ########.fr       */
+/*   Updated: 2024/12/30 14:44:20 by abentaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,8 @@ int	main(int argc, char **argv)
 	pid = fork();
 	if (pid == 0)
 		play_music();
-	game_loop(base);
-	if (pid > 0)
+	if (pid < 0)
 		kill(pid, SIGTERM);
+	game_loop(base);
 	return (0);
 }
